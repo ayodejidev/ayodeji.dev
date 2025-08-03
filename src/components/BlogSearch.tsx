@@ -33,17 +33,18 @@ export default function BlogSearch({ posts }: BlogSearchProps) {
   }, [searchQuery, selectedTag, router]);
 
   return (
-    <div className="mb-8 space-y-4">
+    <div className="space-y-6">
+      {/* Search Bar */}
       <div className="relative">
         <input
           type="text"
-          placeholder="Search posts..."
+          placeholder="Search blog"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full px-4 py-2 pl-10 text-gray-900 dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent"
+          className="w-full px-4 py-3 pl-12 text-gray-900 dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-brand focus:border-transparent transition-all duration-200"
         />
         <svg
-          className="absolute left-3 top-2.5 h-5 w-5 text-gray-400"
+          className="absolute left-4 top-3.5 h-5 w-5 text-gray-400"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -57,13 +58,14 @@ export default function BlogSearch({ posts }: BlogSearchProps) {
         </svg>
       </div>
 
-      <div className="flex flex-wrap gap-2">
+      {/* Tag Filters */}
+      <div className="flex flex-wrap gap-3">
         <button
           onClick={() => setSelectedTag('')}
-          className={`px-3 py-1 rounded-full text-sm transition-colors ${
+          className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
             !selectedTag
-              ? 'bg-brand text-white'
-              : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+              ? 'bg-brand text-white shadow-md'
+              : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600'
           }`}
         >
           All
@@ -72,10 +74,10 @@ export default function BlogSearch({ posts }: BlogSearchProps) {
           <button
             key={tag}
             onClick={() => setSelectedTag(tag)}
-            className={`px-3 py-1 rounded-full text-sm transition-colors ${
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
               selectedTag === tag
-                ? 'bg-brand text-white'
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                ? 'bg-brand text-white shadow-md'
+                : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600'
             }`}
           >
             {tag}

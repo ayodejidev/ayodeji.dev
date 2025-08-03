@@ -2,6 +2,8 @@
 
 import CTAButtons from './CTAButtons';
 import ProfileImage from './ProfileImage';
+import TypingAnimation from './TypingAnimation';
+import SocialLinks from './SocialLinks';
 
 export default function HeroSection() {
   return (
@@ -23,10 +25,19 @@ export default function HeroSection() {
             {/* Bio */}
             <div className="space-y-6">
               <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 leading-relaxed">
-                Developer Advocate at{' '}
-                <span className="font-semibold text-brand dark:text-brand-light">
-                  Adyen
-                </span>
+                <TypingAnimation 
+                  text={[
+                    "Developer Advocate at Adyen",
+                    "Open Source Advocate",
+                    "Full-stack Engineer",
+                    "Technical Content Creator"
+                  ]}
+                  speed={80}
+                  delay={500}
+                  className="font-semibold text-brand dark:text-brand-light"
+                  loop={true}
+                  pauseTime={3000}
+                />
               </p>
               <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
                 I'm passionate about developer experience, enabling teams through content, tooling, open source, and community.
@@ -36,6 +47,11 @@ export default function HeroSection() {
             {/* CTA Buttons */}
             <div className="pt-4">
               <CTAButtons />
+            </div>
+
+            {/* Social Links */}
+            <div className="pt-6">
+              <SocialLinks />
             </div>
           </div>
 

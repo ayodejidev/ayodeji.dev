@@ -1,4 +1,4 @@
-import { getAllPosts } from '@/services/hashnode';
+import { getAllPosts, HashnodePost } from '@/services/hashnode';
 import BlogPostCard from '@/components/BlogPostCard';
 import BlogSearch from '@/components/BlogSearch';
 
@@ -16,7 +16,15 @@ interface BlogPageProps {
 }
 
 export default async function BlogPage({ searchParams }: BlogPageProps) {
-  const posts = await getAllPosts();
+  let posts: HashnodePost[] = [];
+  
+  try {
+    posts = await getAllPosts();
+  } catch (error) {
+    console.warn('Failed to fetch blog posts:', error);
+    // Return empty array if API is not available
+    posts = [];
+  }
   const page = Number(searchParams.page) || 1;
   const postsPerPage = 9;
 
@@ -49,60 +57,95 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   const totalPages = Math.ceil(nonFeaturedPosts.length / postsPerPage);
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-8">Blog</h1>
-      
-      <BlogSearch posts={posts} />
-
-      {/* Featured Posts */}
-      {page === 1 && featuredPosts.length > 0 && (
-        <div className="mb-12">
-          <h2 className="text-2xl font-semibold mb-6">Featured Posts</h2>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {featuredPosts.map((post) => (
-              <BlogPostCard key={post.slug} post={post} />
-            ))}
+    <div className="min-h-screen bg-white dark:bg-gray-900">
+      {/* Header Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+              Blog
+            </h1>
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              Explore my latest thoughts on developer experience, tooling, and community building. 
+              From technical deep-dives to insights on developer advocacy and open source.
+            </p>
           </div>
         </div>
-      )}
+      </section>
 
-      {/* All Posts */}
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {paginatedPosts.map((post) => (
-          <BlogPostCard key={post.slug} post={post} />
-        ))}
-      </div>
-
-      {/* Pagination */}
-      {totalPages > 1 && (
-        <div className="mt-12 flex justify-center gap-2">
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
-            <a
-              key={pageNum}
-              href={`/blog?page=${pageNum}${
-                searchParams.q ? `&q=${searchParams.q}` : ''
-              }${searchParams.tag ? `&tag=${searchParams.tag}` : ''}`}
-              className={`px-4 py-2 rounded-lg transition-colors ${
-                pageNum === page
-                  ? 'bg-brand text-white'
-                  : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
-              }`}
-            >
-              {pageNum}
-            </a>
-          ))}
+      {/* Search & Filter Section */}
+      <section className="px-4 sm:px-6 lg:px-8 mb-12">
+        <div className="max-w-7xl mx-auto">
+          <BlogSearch posts={posts} />
         </div>
+      </section>
+
+      {/* Featured Posts Section */}
+      {page === 1 && featuredPosts.length > 0 && (
+        <section className="px-4 sm:px-6 lg:px-8 mb-16">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-8">
+              Featured Articles
+            </h2>
+            <div className="space-y-8">
+              {featuredPosts.map((post) => (
+                <BlogPostCard key={post.slug} post={post} isFeatured={true} />
+              ))}
+            </div>
+          </div>
+        </section>
       )}
 
-      {/* No Results */}
-      {nonFeaturedPosts.length === 0 && (
-        <div className="text-center py-12">
-          <h2 className="text-2xl font-semibold mb-4">No posts found</h2>
-          <p className="text-gray-600 dark:text-gray-400">
-            Try adjusting your search or filter to find what you're looking for.
-          </p>
+      {/* All Posts Section */}
+      <section className="px-4 sm:px-6 lg:px-8 mb-16">
+        <div className="max-w-7xl mx-auto">
+          {nonFeaturedPosts.length > 0 && (
+            <>
+              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-8">
+                All Articles
+              </h2>
+              <div className="space-y-8">
+                {paginatedPosts.map((post) => (
+                  <BlogPostCard key={post.slug} post={post} isFeatured={false} />
+                ))}
+              </div>
+            </>
+          )}
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="mt-12 flex justify-center gap-2">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+                <a
+                  key={pageNum}
+                  href={`/blog?page=${pageNum}${
+                    searchParams.q ? `&q=${searchParams.q}` : ''
+                  }${searchParams.tag ? `&tag=${searchParams.tag}` : ''}`}
+                  className={`px-4 py-2 rounded-lg transition-colors ${
+                    pageNum === page
+                      ? 'bg-brand text-white'
+                      : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                  }`}
+                >
+                  {pageNum}
+                </a>
+              ))}
+            </div>
+          )}
+
+          {/* No Results */}
+          {nonFeaturedPosts.length === 0 && (
+            <div className="text-center py-12">
+              <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">
+                No posts found
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400">
+                Try adjusting your search or filter to find what you're looking for.
+              </p>
+            </div>
+          )}
         </div>
-      )}
+      </section>
     </div>
   );
 } 

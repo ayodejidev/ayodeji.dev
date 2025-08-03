@@ -4,13 +4,8 @@ const HASHNODE_API_URL = 'https://gql.hashnode.com';
 const HASHNODE_API_KEY = process.env.HASHNODE_API_KEY;
 const HASHNODE_USERNAME = process.env.NEXT_PUBLIC_HASHNODE_USERNAME;
 
-if (!HASHNODE_API_KEY) {
-  throw new Error('Hashnode API key is not configured');
-}
-
-if (!HASHNODE_USERNAME) {
-  throw new Error('Hashnode username is not configured');
-}
+// Only throw errors in development or when actually making API calls
+// During build time, we'll handle missing env vars gracefully
 
 // Debug logging
 function debugLog(message: string, data?: any) {
@@ -116,10 +111,17 @@ const GET_USER_QUERY = `
 
 // Function to fetch user data and posts
 export async function getUserData(): Promise<HashnodeUser> {
-  // We can safely assert HASHNODE_API_KEY is string because of the check above
+  if (!HASHNODE_API_KEY) {
+    throw new Error('Hashnode API key is not configured');
+  }
+
+  if (!HASHNODE_USERNAME) {
+    throw new Error('Hashnode username is not configured');
+  }
+
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
-    'Authorization': HASHNODE_API_KEY as string,
+    'Authorization': HASHNODE_API_KEY,
   };
 
   const response = await fetch(HASHNODE_API_URL, {
