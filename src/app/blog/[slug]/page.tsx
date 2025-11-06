@@ -20,28 +20,43 @@ interface BlogPostPageProps {
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
-  const post = await getPostBySlug(params.slug);
-  
-  if (!post) {
+  try {
+    const post = await getPostBySlug(params.slug);
+    
+    if (!post) {
+      return {
+        title: 'Post Not Found',
+      };
+    }
+
+    return {
+      title: `${post.title} | Ayodeji Ogundare`,
+      description: post.brief,
+      openGraph: {
+        title: post.title,
+        description: post.brief,
+        images: post.coverImage ? [post.coverImage.url] : [],
+      },
+    };
+  } catch (error) {
+    console.warn('Failed to fetch post metadata:', error);
     return {
       title: 'Post Not Found',
     };
   }
-
-  return {
-    title: `${post.title} | Ayodeji Ogundare`,
-    description: post.brief,
-    openGraph: {
-      title: post.title,
-      description: post.brief,
-      images: post.coverImage ? [post.coverImage.url] : [],
-    },
-  };
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = await getPostBySlug(params.slug);
-  const allPosts = await getAllPosts();
+  let post;
+  let allPosts = [];
+  
+  try {
+    post = await getPostBySlug(params.slug);
+    allPosts = await getAllPosts();
+  } catch (error) {
+    console.warn('Failed to fetch blog post:', error);
+    notFound();
+  }
 
   if (!post) {
     notFound();
