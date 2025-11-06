@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import Image from 'next/image';
 
 interface Talk {
   id: number;
@@ -10,6 +11,8 @@ interface Talk {
   location: string;
   videoUrl: string | null;
   videoTitle: string | null;
+  imageUrl: string | null;
+  eventUrl: string | null;
   tags: string[];
 }
 
@@ -27,7 +30,21 @@ export default function Speaking() {
       location: "Lagos, Nigeria",
       videoUrl: "https://www.youtube.com/embed/-ZnzJEB3GGg",
       videoTitle: "OSCA FEST 2022 - Imagine a world without open source",
+      imageUrl: null,
+      eventUrl: null,
       tags: ["Open Source", "Community", "Africa"]
+    },
+    {
+      id: 2,
+      title: "InnerSource by Design: Scaling Internal Collaboration with Open Source Operating Models",
+      description: "This session explores how organizations can apply proven open source operating models to strengthen their InnerSource efforts.",
+      date: "2025-11-13",
+      location: "Berlin, Germany",
+      videoUrl: null,
+      videoTitle: null,
+      imageUrl: "https://innersourcecommons.org/images/events/Summit2025.png",
+      eventUrl: "https://innersourcecommons.org/events/isc-2025/",
+      tags: ["Open Source", "Inner Source", "Developer Experience"]
     }
   ], []);
 
@@ -259,7 +276,7 @@ function TalkCard({ talk, isUpcoming }: { talk: Talk; isUpcoming: boolean }) {
   return (
     <article className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden group hover:shadow-lg transition-all duration-300">
       <div className="flex flex-col md:flex-row">
-        {/* Left: Thumbnail/Video */}
+        {/* Left: Thumbnail/Video/Image */}
         <div className="relative w-full md:w-64 h-48 md:h-auto flex-shrink-0">
           {talk.videoUrl ? (
             <div className="w-full h-full">
@@ -271,6 +288,16 @@ function TalkCard({ talk, isUpcoming }: { talk: Talk; isUpcoming: boolean }) {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               ></iframe>
+            </div>
+          ) : talk.imageUrl ? (
+            <div className="relative w-full h-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
+              <Image
+                src={talk.imageUrl}
+                alt={talk.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 256px"
+              />
             </div>
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-brand/20 to-brand-light/20 dark:from-brand/30 dark:to-brand-light/30 flex items-center justify-center">
@@ -337,19 +364,34 @@ function TalkCard({ talk, isUpcoming }: { talk: Talk; isUpcoming: boolean }) {
             </div>
 
             {/* CTA Link */}
-            {talk.videoUrl && (
-              <a
-                href={talk.videoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-brand dark:text-brand-light font-medium hover:gap-3 transition-all duration-200 group/link"
-              >
-                Watch talk
-                <svg className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </a>
-            )}
+            <div className="flex items-center gap-4">
+              {talk.videoUrl && (
+                <a
+                  href={talk.videoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-brand dark:text-brand-light font-medium hover:gap-3 transition-all duration-200 group/link"
+                >
+                  Watch talk
+                  <svg className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              )}
+              {talk.eventUrl && (
+                <a
+                  href={talk.eventUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-brand dark:text-brand-light font-medium hover:gap-3 transition-all duration-200 group/link"
+                >
+                  View Event
+                  <svg className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              )}
+            </div>
           </div>
         </div>
       </div>

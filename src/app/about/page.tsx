@@ -9,7 +9,7 @@ const skills = {
   frameworks: ['React', 'Next.js', 'Node.js', 'Express', 'Tailwind CSS'],
   tools: ['Git', 'GitHub', 'Docker', 'Terraform', 'Vault', 'GCP', 'AWS'],
   databases: ['MongoDB', 'PostgreSQL'],
-  softSkills: ['Technical Writing', 'Public Speaking', 'Team Leadership', 'Problem Solving', 'Communication']
+  softSkills: ['Public Speaking', 'Team Leadership', 'Problem Solving', 'Communication']
 };
 
 // Experience data with enhanced information
@@ -19,7 +19,7 @@ const experience = [
     company: 'Adyen',
     type: 'Full-time',
     period: 'Sep 2022 - Present',
-    duration: '2+ years'
+    duration: '3+ years'
   },
   {
     role: 'Full-stack Software Developer',
