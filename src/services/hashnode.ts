@@ -112,11 +112,15 @@ const GET_USER_QUERY = `
 // Function to fetch user data and posts
 export async function getUserData(): Promise<HashnodeUser> {
   if (!HASHNODE_API_KEY) {
-    throw new Error('Hashnode API key is not configured');
+    const error = new Error('Hashnode API key is not configured');
+    console.warn('[Hashnode Service]', error.message);
+    throw error;
   }
 
   if (!HASHNODE_USERNAME) {
-    throw new Error('Hashnode username is not configured');
+    const error = new Error('Hashnode username is not configured');
+    console.warn('[Hashnode Service]', error.message);
+    throw error;
   }
 
   const headers: HeadersInit = {

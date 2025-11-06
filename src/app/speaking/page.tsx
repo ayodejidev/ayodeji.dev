@@ -115,16 +115,12 @@ export default function Speaking() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Header Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <section className="py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+          <div className="text-left mb-6">
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Speaking
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              I love sharing knowledge and experiences with the developer community through talks, workshops, and presentations. 
-              From open source advocacy to technical deep-dives, I'm passionate about connecting with developers worldwide.
-            </p>
           </div>
         </div>
       </section>

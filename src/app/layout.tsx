@@ -19,10 +19,6 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: '/favicon.ico?v=2',
-        sizes: 'any',
-      },
-      {
         url: '/profile.png',
         type: 'image/png',
         sizes: '32x32',
@@ -59,7 +55,7 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
-      <body className={`${robotoMono.className} antialiased`}>
+      <body className={`${robotoMono.className} antialiased`} suppressHydrationWarning>
         <ThemeProvider>
           <div className="min-h-screen flex flex-col">
             <Navbar />
