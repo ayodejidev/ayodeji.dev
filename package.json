@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "marked": "^15.0.12",
-    "next": "14.1.0",
+    "next": "14.2.33",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -29,7 +29,7 @@
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.17",
     "eslint": "^8.56.0",
-    "eslint-config-next": "14.1.0",
+    "eslint-config-next": "14.2.33",
     "jest": "^30.0.0",
     "jest-environment-jsdom": "^30.0.0",
     "postcss": "^8.4.35",
