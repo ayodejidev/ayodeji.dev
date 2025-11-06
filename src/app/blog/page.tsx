@@ -59,16 +59,12 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Header Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <section className="py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+          <div className="text-left mb-6">
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Blog
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              Explore my latest thoughts on developer experience, tooling, and community building. 
-              From technical deep-dives to insights on developer advocacy and open source.
-            </p>
           </div>
         </div>
       </section>
