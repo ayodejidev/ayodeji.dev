@@ -80,7 +80,7 @@ export default function Projects() {
     <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Hero Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-6">
             Projects
           </h1>
@@ -93,7 +93,7 @@ export default function Projects() {
 
       {/* Search and Filter Section */}
       <section className="px-4 sm:px-6 lg:px-8 mb-12">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
             {/* Search Input */}
             <div className="w-full sm:w-96">
@@ -130,7 +130,7 @@ export default function Projects() {
 
       {/* Projects Grid */}
       <section className="px-4 sm:px-6 lg:px-8 pb-20">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProjects.map(project => (
               <div
