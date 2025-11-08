@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import Image from 'next/image';
 
 interface Talk {
@@ -17,9 +17,6 @@ interface Talk {
 }
 
 export default function Speaking() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedTag, setSelectedTag] = useState('');
-
   // Define all talks with their dates and tags
   const allTalks: Talk[] = useMemo(() => [
     {
@@ -48,36 +45,13 @@ export default function Speaking() {
     }
   ], []);
 
-  // Get unique tags from all talks
-  const allTags = useMemo(() => 
-    Array.from(new Set(allTalks.flatMap(talk => talk.tags))).sort(),
-    [allTalks]
-  );
-
-  // Filter talks based on search query and tag
-  const filteredTalks = useMemo(() => {
-    return allTalks.filter(talk => {
-      const matchesSearch = searchQuery
-        ? talk.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          talk.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          talk.location.toLowerCase().includes(searchQuery.toLowerCase())
-        : true;
-
-      const matchesTag = selectedTag
-        ? talk.tags.includes(selectedTag)
-        : true;
-
-      return matchesSearch && matchesTag;
-    });
-  }, [allTalks, searchQuery, selectedTag]);
-
   // Categorize talks based on current date
   const { upcomingTalks, pastTalks } = useMemo(() => {
     const now = new Date();
     const upcoming: Talk[] = [];
     const past: Talk[] = [];
 
-    filteredTalks.forEach(talk => {
+    allTalks.forEach(talk => {
       const talkDate = new Date(talk.date);
       if (talkDate > now) {
         upcoming.push(talk);
@@ -93,7 +67,7 @@ export default function Speaking() {
     past.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
     return { upcomingTalks: upcoming, pastTalks: past };
-  }, [filteredTalks]);
+  }, [allTalks]);
 
   // Format date for display
   const formatDate = (dateString: string) => {
@@ -116,7 +90,7 @@ export default function Speaking() {
     <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Header Section */}
       <section className="py-8 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="text-left mb-6">
             <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Speaking
@@ -125,67 +99,9 @@ export default function Speaking() {
         </div>
       </section>
 
-      {/* Search & Filter Section */}
-      <section className="px-4 sm:px-6 lg:px-8 mb-12">
-        <div className="max-w-7xl mx-auto">
-          <div className="space-y-6">
-            {/* Search Bar */}
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search talks"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-4 py-3 pl-12 text-gray-900 dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-brand focus:border-transparent transition-all duration-200"
-              />
-              <svg
-                className="absolute left-4 top-3.5 h-5 w-5 text-gray-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-            </div>
-
-            {/* Tag Filters */}
-            <div className="flex flex-wrap gap-3">
-              <button
-                onClick={() => setSelectedTag('')}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                  !selectedTag
-                    ? 'bg-brand text-white shadow-md'
-                    : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600'
-                }`}
-              >
-                All
-              </button>
-              {allTags.map((tag) => (
-                <button
-                  key={tag}
-                  onClick={() => setSelectedTag(tag)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                    selectedTag === tag
-                      ? 'bg-brand text-white shadow-md'
-                      : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600'
-                  }`}
-                >
-                  {tag}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Upcoming Talks Section */}
       <section className="px-4 sm:px-6 lg:px-8 mb-16">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-8">
             Upcoming Talks
           </h2>
@@ -209,7 +125,7 @@ export default function Speaking() {
 
       {/* Past Talks Section */}
       <section className="px-4 sm:px-6 lg:px-8 mb-16">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-8">
             Past Talks
           </h2>
@@ -234,7 +150,7 @@ export default function Speaking() {
 
       {/* Call to Action */}
       <section className="px-4 sm:px-6 lg:px-8 mb-16">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-8 text-center">
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
               Interested in having me speak at your event?
