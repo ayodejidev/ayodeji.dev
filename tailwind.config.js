@@ -15,9 +15,9 @@ module.exports = {
       },
       colors: {
         brand: {
-          DEFAULT: '#6cabde',
-          dark: '#5a9ac8',
-          light: '#7db8e4',
+          DEFAULT: '#000000',
+          dark: '#1a1a1a',
+          light: '#404040',
         },
       },
       typography: {
@@ -26,9 +26,9 @@ module.exports = {
             maxWidth: 'none',
             color: 'inherit',
             a: {
-              color: '#6cabde',
+              color: '#000000',
               '&:hover': {
-                color: '#5a9ac8',
+                color: '#1a1a1a',
               },
             },
             strong: {
