@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col items-center text-center">
           <p className="text-gray-600 dark:text-gray-400 mb-2">
-            Built with <span className="text-blue-500">💙</span> by Ayodeji Ogundare
+            Built with <span className="text-blue-500">🖤</span> by Ayodeji Ogundare
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-500">
             © 2025 All rights reserved.
