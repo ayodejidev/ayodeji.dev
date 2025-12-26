@@ -9,10 +9,11 @@ interface Talk {
   description: string;
   date: string;
   location: string;
-  videoUrl: string | null;
-  videoTitle: string | null;
-  imageUrl: string | null;
-  eventUrl: string | null;
+  videoEmbedUrl?: string;
+  videoUrl?: string;
+  videoTitle?: string;
+  imageUrl?: string;
+  eventUrl?: string;
   tags: string[];
 }
 
@@ -25,10 +26,9 @@ export default function Speaking() {
       description: "Ayodeji spoke at Open Source Community Africa's flagship event about the critical importance of open source software and how it shapes our digital world.",
       date: "2022-03-25",
       location: "Lagos, Nigeria",
-      videoUrl: "https://www.youtube.com/embed/-ZnzJEB3GGg",
-      videoTitle: "OSCA FEST 2022 - Imagine a world without open source",
-      imageUrl: null,
-      eventUrl: null,
+      videoEmbedUrl: "https://www.youtube.com/embed/-ZnzJEB3GGg",
+      videoUrl: "https://www.youtube.com/watch?v=-ZnzJEB3GGg",
+      videoTitle: "Imagine a world without open source",
       tags: ["Open Source", "Community", "Africa"]
     },
     {
@@ -37,11 +37,10 @@ export default function Speaking() {
       description: "This session explores how organizations can apply proven open source operating models to strengthen their InnerSource efforts.",
       date: "2025-11-13",
       location: "Berlin, Germany",
-      videoUrl: null,
-      videoTitle: null,
-      imageUrl: "https://innersourcecommons.org/images/events/Summit2025.png",
-      eventUrl: "https://innersourcecommons.org/events/isc-2025/",
-      tags: ["Open Source", "Inner Source", "Developer Experience"]
+      videoEmbedUrl: "https://www.youtube.com/embed/ggF3fIT5lh8",
+      videoUrl: "https://www.youtube.com/watch?v=ggF3fIT5lh8",
+      videoTitle: "InnerSource by Design: Scaling Internal Collaboration with Open Source Operating Models",
+      tags: ["Open Source", "InnerSource", "Developer Experience"]
     }
   ], []);
 
@@ -190,11 +189,11 @@ function TalkCard({ talk, isUpcoming }: { talk: Talk; isUpcoming: boolean }) {
       <div className="flex flex-col md:flex-row">
         {/* Left: Thumbnail/Video/Image */}
         <div className="relative w-full md:w-64 h-48 md:h-auto flex-shrink-0">
-          {talk.videoUrl ? (
+          {talk.videoEmbedUrl ? (
             <div className="w-full h-full">
               <iframe
                 className="w-full h-full"
-                src={talk.videoUrl}
+                src={talk.videoEmbedUrl}
                 title={talk.videoTitle || talk.title}
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
