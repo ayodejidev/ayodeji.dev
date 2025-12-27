@@ -1,5 +1,6 @@
 import HeroSection from '@/components/HeroSection';
 import FeaturedSection from '@/components/FeaturedSection';
+import RecentActivity from '@/components/RecentActivity';
 
 export default function Home() {
   return (
@@ -9,6 +10,9 @@ export default function Home() {
       
       {/* Featured Section */}
       <FeaturedSection />
+      
+      {/* Recent Activity Section */}
+      <RecentActivity />
     </main>
   );
 }

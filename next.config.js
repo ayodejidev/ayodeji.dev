@@ -14,6 +14,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'innersourcecommons.org',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
     ],
   },
 };

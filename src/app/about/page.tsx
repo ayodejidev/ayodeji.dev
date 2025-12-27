@@ -64,12 +64,10 @@ export default function About() {
                 About Me
               </h1>
               <p className="text-xl text-gray-600 dark:text-gray-300 mb-6">
-                I'm a Developer Advocate and Fullstack Software Engineer passionate about 
-                creating exceptional developer experiences and building tools that empower teams.
+                I'm a Developer Advocate at Adyen and Fullstack Software Engineer.
               </p>
               <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-                With a focus on open source, technical writing, and community building, 
-                I help developers succeed through content, tooling, and mentorship.
+                6+ years of experience leading open source programs, building developer communities, and improving developer experience through content, code, and collaboration.
               </p>
               <div className="flex gap-4">
                 <Link

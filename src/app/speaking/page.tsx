@@ -2,47 +2,11 @@
 
 import { useMemo } from 'react';
 import Image from 'next/image';
-
-interface Talk {
-  id: number;
-  title: string;
-  description: string;
-  date: string;
-  location: string;
-  videoEmbedUrl?: string;
-  videoUrl?: string;
-  videoTitle?: string;
-  imageUrl?: string;
-  eventUrl?: string;
-  tags: string[];
-}
+import { talks, Talk } from '@/config/speaking';
 
 export default function Speaking() {
-  // Define all talks with their dates and tags
-  const allTalks: Talk[] = useMemo(() => [
-    {
-      id: 1,
-      title: "OSCA FEST 2022 – Imagine a world without open source",
-      description: "Ayodeji spoke at Open Source Community Africa's flagship event about the critical importance of open source software and how it shapes our digital world.",
-      date: "2022-03-25",
-      location: "Lagos, Nigeria",
-      videoEmbedUrl: "https://www.youtube.com/embed/-ZnzJEB3GGg",
-      videoUrl: "https://www.youtube.com/watch?v=-ZnzJEB3GGg",
-      videoTitle: "Imagine a world without open source",
-      tags: ["Open Source", "Community", "Africa"]
-    },
-    {
-      id: 2,
-      title: "InnerSource by Design: Scaling Internal Collaboration with Open Source Operating Models",
-      description: "This session explores how organizations can apply proven open source operating models to strengthen their InnerSource efforts.",
-      date: "2025-11-13",
-      location: "Berlin, Germany",
-      videoEmbedUrl: "https://www.youtube.com/embed/ggF3fIT5lh8",
-      videoUrl: "https://www.youtube.com/watch?v=ggF3fIT5lh8",
-      videoTitle: "InnerSource by Design: Scaling Internal Collaboration with Open Source Operating Models",
-      tags: ["Open Source", "InnerSource", "Developer Experience"]
-    }
-  ], []);
+  // Use talks from config
+  const allTalks: Talk[] = useMemo(() => talks, []);
 
   // Categorize talks based on current date
   const { upcomingTalks, pastTalks } = useMemo(() => {
@@ -102,7 +66,7 @@ export default function Speaking() {
       <section className="px-4 sm:px-6 lg:px-8 mb-16">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-8">
-            Upcoming Talks
+            Upcoming talks
           </h2>
           <div className="space-y-8">
             {upcomingTalks.length > 0 ? (
@@ -126,7 +90,7 @@ export default function Speaking() {
       <section className="px-4 sm:px-6 lg:px-8 mb-16">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-8">
-            Past Talks
+            Past talks
           </h2>
           <div className="space-y-8">
             {pastTalks.length > 0 ? (
@@ -200,10 +164,10 @@ function TalkCard({ talk, isUpcoming }: { talk: Talk; isUpcoming: boolean }) {
                 allowFullScreen
               ></iframe>
             </div>
-          ) : talk.imageUrl ? (
+          ) : talk.image ? (
             <div className="relative w-full h-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
               <Image
-                src={talk.imageUrl}
+                src={talk.image}
                 alt={talk.title}
                 fill
                 className="object-cover"

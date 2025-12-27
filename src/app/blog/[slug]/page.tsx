@@ -6,6 +6,7 @@ import ShareButtons from '@/components/ShareButtons';
 import TableOfContents from '@/components/TableOfContents';
 import BlogPostCard from '@/components/BlogPostCard';
 import { marked } from 'marked';
+import { siteConfig } from '@/config/site';
 
 // Configure marked to use synchronous mode
 marked.setOptions({
@@ -30,7 +31,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     }
 
     return {
-      title: `${post.title} | Ayodeji Ogundare`,
+      title: `${post.title} | ${siteConfig.title}`,
       description: post.brief,
       openGraph: {
         title: post.title,
@@ -141,10 +142,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
           <div className="border-t dark:border-gray-700 pt-8">
             <h2 className="text-xl font-semibold mb-4">Share this post</h2>
-            <ShareButtons
-              url={`https://ayodeji.dev/blog/${post.slug}`}
-              title={post.title}
-            />
+                <ShareButtons
+                  url={`${siteConfig.url}/blog/${post.slug}`}
+                  title={post.title}
+                />
           </div>
         </article>
 

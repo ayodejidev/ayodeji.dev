@@ -5,6 +5,8 @@ import Image from 'next/image'
 import ThemeToggle from './ThemeToggle'
 import { useState } from 'react'
 import { usePathname } from 'next/navigation'
+import { siteConfig } from '@/config/site'
+import { navLinks } from '@/config/navigation'
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -40,43 +42,41 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center space-x-2">
             <Image
-              src="/logo.png"
-              alt="Ayodeji Ogundare"
+              src={siteConfig.branding.logo}
+              alt={siteConfig.author.name}
               className="h-8 w-8 rounded-full"
               width={32}
               height={32}
             />
-            <span className="font-bold text-gray-900 dark:text-white">Ayodeji.dev</span>
+            <span className="font-bold text-gray-900 dark:text-white">{siteConfig.branding.siteName}</span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
-            <Link 
-              href="/" 
-              className={`transition-all duration-300 ${getActiveClasses('/')}`}
-            >
-              Home
-            </Link>
-            <Link 
-              href="/blog" 
-              className={`transition-all duration-300 ${getActiveClasses('/blog')}`}
-            >
-              Blog
-            </Link>
-            <Link 
-              href="/speaking" 
-              className={`transition-all duration-300 ${getActiveClasses('/speaking')}`}
-            >
-              Speaking
-            </Link>
-            <a
-              href="https://github.com/ayodejidev"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 hover:text-brand dark:text-gray-300 dark:hover:text-brand-light transition-all duration-200"
-            >
-              Projects
-            </a>
+            {navLinks.map((link) => {
+              if (link.external) {
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-600 hover:text-brand dark:text-gray-300 dark:hover:text-brand-light transition-all duration-200"
+                  >
+                    {link.label}
+                  </a>
+                );
+              }
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`transition-all duration-300 ${getActiveClasses(link.href)}`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
 
           <div className="flex items-center space-x-4">
@@ -119,48 +119,35 @@ export default function Navbar() {
           isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}>
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link
-              href="/"
-              className={`${getMobileActiveClasses('/')} transition-all duration-300 transform ${
-                isMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0'
-              }`}
-              style={{ transitionDelay: isMenuOpen ? '0ms' : '0ms' }}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Home
-            </Link>
-            <Link
-              href="/blog"
-              className={`${getMobileActiveClasses('/blog')} transition-all duration-300 transform ${
-                isMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0'
-              }`}
-              style={{ transitionDelay: isMenuOpen ? '50ms' : '0ms' }}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Blog
-            </Link>
-            <Link
-              href="/speaking"
-              className={`${getMobileActiveClasses('/speaking')} transition-all duration-300 transform ${
-                isMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0'
-              }`}
-              style={{ transitionDelay: isMenuOpen ? '100ms' : '0ms' }}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Speaking
-            </Link>
-            <a
-              href="https://github.com/ayodejidev"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-300 transform ${
-                isMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0'
-              }`}
-              style={{ transitionDelay: isMenuOpen ? '150ms' : '0ms' }}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Projects
-            </a>
+            {navLinks.map((link, index) => {
+              if (link.external) {
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-300 transform"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                );
+              }
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`${getMobileActiveClasses(link.href)} transition-all duration-300 transform ${
+                    isMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0'
+                  }`}
+                  style={{ transitionDelay: isMenuOpen ? `${index * 50}ms` : '0ms' }}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </div>

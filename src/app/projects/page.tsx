@@ -3,53 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-
-// Project type definition
-type Project = {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-  tags: string[];
-  link: string;
-  github?: string;
-  featured?: boolean;
-};
-
-// Sample projects data
-const projects: Project[] = [
-  {
-    id: '1',
-    title: 'Project One',
-    description: 'A brief description of your first project. Explain what it does and what technologies you used.',
-    image: 'https://picsum.photos/400/300?random=10',
-    tags: ['React', 'Node.js', 'MongoDB'],
-    link: 'https://project1.com',
-    github: 'https://github.com/yourusername/project1',
-    featured: true
-  },
-  {
-    id: '2',
-    title: 'Project Two',
-    description: 'Description of your second project. Highlight the key features and your role in development.',
-    image: 'https://picsum.photos/400/300?random=11',
-    tags: ['Next.js', 'TypeScript', 'Tailwind'],
-    link: 'https://project2.com',
-    github: 'https://github.com/yourusername/project2',
-    featured: true
-  },
-  // Add more projects as needed
-  {
-    id: 'github-data-app',
-    title: 'GitHub Data App',
-    description: 'A web application that visualizes GitHub user and repo data with beautiful charts and insights. Built with Next.js, TypeScript, and Tailwind CSS.',
-    image: 'https://picsum.photos/400/300?random=12',
-    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'GitHub API', 'Charts'],
-    link: 'https://github.com/ayodejidev/github-data-app',
-    github: 'https://github.com/ayodejidev/github-data-app',
-    featured: true
-  },
-];
+import { projects, Project } from '@/config/projects';
 
 // All available tags
 const allTags = Array.from(new Set(projects.flatMap(project => project.tags)));
@@ -84,10 +38,6 @@ export default function Projects() {
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-6">
             Projects
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl">
-            A collection of my work, from open source contributions to personal projects.
-            Each project represents a unique challenge and learning opportunity.
-          </p>
         </div>
       </section>
 

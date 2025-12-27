@@ -1,8 +1,10 @@
 import { getAllPosts, HashnodePost } from '@/services/hashnode';
 import BlogPostCard from '@/components/BlogPostCard';
+import { isFeaturedPost, featuredBlogIds } from '@/config/blog';
+import { siteConfig } from '@/config/site';
 
 export const metadata = {
-  title: 'Blog | Ayodeji Ogundare',
+  title: `Blog | ${siteConfig.title}`,
   description: 'Read my latest thoughts on developer experience, tooling, and community.',
 };
 
@@ -17,12 +19,29 @@ export default async function BlogPage() {
     posts = [];
   }
 
-  // Get featured posts (first 3 posts)
-  const featuredPosts = posts.slice(0, 3);
+  // Get featured posts based on configuration
+  // Posts are sorted by featured order (as specified in config) then by published date
+  const featuredPosts = posts
+    .filter((post) => isFeaturedPost(post.id, post.slug))
+    .sort((a, b) => {
+      // Maintain order as specified in config
+      const aIndex = featuredBlogIds.findIndex(
+        (id) => id === a.id || id === a.slug
+      );
+      const bIndex = featuredBlogIds.findIndex(
+        (id) => id === b.id || id === b.slug
+      );
+      
+      // If order is specified in config, use it; otherwise sort by date
+      if (aIndex !== -1 && bIndex !== -1) {
+        return aIndex - bIndex;
+      }
+      return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
+    });
 
   // Remove featured posts from the main list
   const nonFeaturedPosts = posts.filter(
-    post => !featuredPosts.some(featured => featured.slug === post.slug)
+    (post) => !isFeaturedPost(post.id, post.slug)
   );
 
   return (
@@ -43,7 +62,7 @@ export default async function BlogPage() {
         <section className="px-4 sm:px-6 lg:px-8 mb-16">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-8">
-              Featured Articles
+              Featured articles
             </h2>
             <div className="space-y-8">
               {featuredPosts.map((post) => (
@@ -60,7 +79,7 @@ export default async function BlogPage() {
           {nonFeaturedPosts.length > 0 && (
             <>
               <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-8">
-                All Articles
+                More articles
               </h2>
               <div className="space-y-8">
                 {nonFeaturedPosts.map((post) => (
