@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { siteConfig } from '@/config/site';
 
 interface FormData {
   name: string;
@@ -341,7 +342,7 @@ export default function Contact() {
               </h2>
               <div className="space-y-6">
                 <a
-                  href="https://github.com/ayodejidev"
+                  href={siteConfig.social.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex items-center space-x-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300 transform hover:scale-105 hover:shadow-md"
@@ -363,7 +364,7 @@ export default function Contact() {
                 </a>
 
                 <a
-                  href="https://twitter.com/ayodejidev"
+                  href={siteConfig.social.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex items-center space-x-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300 transform hover:scale-105 hover:shadow-md"
@@ -385,7 +386,7 @@ export default function Contact() {
                 </a>
 
                 <a
-                  href="https://www.linkedin.com/in/ayodeji-ogundare/"
+                  href={siteConfig.social.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex items-center space-x-4 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300 transform hover:scale-105 hover:shadow-md"

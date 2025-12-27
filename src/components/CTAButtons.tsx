@@ -16,7 +16,7 @@ export default function CTAButtons() {
         onMouseEnter={() => setPrimaryHovered(true)}
         onMouseLeave={() => setPrimaryHovered(false)}
       >
-        Let's Connect
+        Let's connect
         <svg
           className={`ml-2 w-5 h-5 transition-transform duration-200 ${primaryHovered ? 'translate-x-1' : ''}`}
           fill="none"

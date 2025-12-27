@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { blogConfig } from '@/config/blog';
 
 const HASHNODE_API_URL = 'https://gql.hashnode.com';
 const HASHNODE_API_KEY = process.env.HASHNODE_API_KEY;
@@ -25,6 +26,7 @@ debugLog('Environment Variables Check:', {
 
 // Types for the Hashnode API responses
 export interface HashnodePost {
+  id?: string;
   title: string;
   brief: string;
   slug: string;
@@ -66,9 +68,9 @@ export interface HashnodeUser {
   };
 }
 
-// GraphQL query to fetch user data and posts
+// GraphQL query to fetch user data and posts (with pagination support)
 const GET_USER_QUERY = `
-  query GetUser($username: String!) {
+  query GetUser($username: String!, $first: Int!, $after: String) {
     user(username: $username) {
       id
       name
@@ -79,9 +81,10 @@ const GET_USER_QUERY = `
           node {
             url
             title
-            posts(first: 5) {
+            posts(first: $first, after: $after) {
               edges {
                 node {
+                  id
                   title
                   brief
                   slug
@@ -109,8 +112,8 @@ const GET_USER_QUERY = `
   }
 `;
 
-// Function to fetch user data and posts
-export async function getUserData(): Promise<HashnodeUser> {
+// Function to fetch user data and posts with pagination
+export async function getUserData(first: number = 20, after?: string): Promise<HashnodeUser> {
   if (!HASHNODE_API_KEY) {
     const error = new Error('Hashnode API key is not configured');
     console.warn('[Hashnode Service]', error.message);
@@ -135,6 +138,8 @@ export async function getUserData(): Promise<HashnodeUser> {
       query: GET_USER_QUERY,
       variables: {
         username: HASHNODE_USERNAME,
+        first,
+        after: after || null,
       },
     }),
   });
@@ -153,44 +158,47 @@ export async function getUserData(): Promise<HashnodeUser> {
   return data.data.user;
 }
 
-// Function to fetch a single post by slug
+// Function to fetch a single post by slug (searches through all posts)
 export async function getPostBySlug(slug: string): Promise<HashnodePost | null> {
-  const userData = await getUserData();
-  const publication = userData.publications.edges[0]?.node;
-  
-  if (!publication) {
-    return null;
-  }
-
-  const post = publication.posts.edges.find(
-    (edge) => edge.node.slug === slug
-  )?.node;
-
-  return post || null;
+  const allPosts = await getAllPosts();
+  return allPosts.find((post) => post.slug === slug) || null;
 }
 
-// Function to get all posts
+// Function to get all posts (fetches all pages)
 export async function getAllPosts(): Promise<HashnodePost[]> {
-  const userData = await getUserData();
-  const publication = userData.publications.edges[0]?.node;
-  
-  if (!publication) {
-    return [];
+  const allPosts: HashnodePost[] = [];
+  let hasNextPage = true;
+  let cursor: string | undefined = undefined;
+  const pageSize = blogConfig.pageSize;
+
+  while (hasNextPage) {
+    const userData = await getUserData(pageSize, cursor);
+    const publication = userData.publications.edges[0]?.node;
+    
+    if (!publication) {
+      break;
+    }
+
+    const posts = publication.posts.edges.map((edge) => edge.node);
+    allPosts.push(...posts);
+
+    hasNextPage = publication.posts.pageInfo.hasNextPage;
+    cursor = publication.posts.pageInfo.endCursor;
   }
 
-  return publication.posts.edges.map((edge) => edge.node);
+  return allPosts;
 }
 
 // Function to get paginated posts
 export async function getPaginatedPosts(
-  first: number = 5,
+  first: number = 20,
   after?: string
 ): Promise<{
   posts: HashnodePost[];
   hasNextPage: boolean;
   endCursor: string;
 }> {
-  const userData = await getUserData();
+  const userData = await getUserData(first, after);
   const publication = userData.publications.edges[0]?.node;
   
   if (!publication) {

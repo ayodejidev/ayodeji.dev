@@ -5,6 +5,7 @@ import MobileMenu from "@/components/MobileMenu";
 import { ThemeProvider } from '@/components/ThemeProvider'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import { siteConfig } from '@/config/site'
 
 const robotoMono = Roboto_Mono({ 
   subsets: ["latin"],
@@ -13,35 +14,35 @@ const robotoMono = Roboto_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ayodeji Ogundare",
-  description: "Developer Advocate & Fullstack Software Engineer",
-  metadataBase: new URL('http://localhost:3000'),
+  title: siteConfig.title,
+  description: siteConfig.description,
+  metadataBase: new URL(siteConfig.url),
   icons: {
     icon: [
       {
-        url: '/profile.png',
+        url: siteConfig.branding.profileImage,
         type: 'image/png',
         sizes: '32x32',
       },
       {
-        url: '/profile.png',
+        url: siteConfig.branding.profileImage,
         type: 'image/png',
         sizes: '16x16',
       },
       {
-        url: '/profile.png',
+        url: siteConfig.branding.profileImage,
         type: 'image/png',
         sizes: '48x48',
       },
     ],
     apple: [
       {
-        url: '/profile.png',
+        url: siteConfig.branding.profileImage,
         type: 'image/png',
         sizes: '180x180',
       },
     ],
-    shortcut: '/profile.png',
+    shortcut: siteConfig.branding.profileImage,
   },
 };
 
