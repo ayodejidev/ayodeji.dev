@@ -1,95 +1,55 @@
-# Ayodeji.dev
+# Personal Portfolio Template
 
-A personal portfolio website built with Next.js, showcasing blog posts, speaking engagements, projects, and professional experience.
+A modern, open-source personal portfolio website template built with Next.js. Perfect for developers who want to showcase their work, blog posts, speaking engagements, and projects.
 
-## Features
+![Next.js](https://img.shields.io/badge/Next.js-14.2-black?style=flat&logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat&logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38bdf8?style=flat&logo=tailwind-css)
+![CI](https://github.com/ayodejidev/ayodeji.dev/actions/workflows/node-ci.yml/badge.svg)
+![License](https://img.shields.io/badge/license-MIT-green?style=flat)
 
-- **Blog Integration**: Fetches and displays blog posts from Hashnode API
-- **Speaking Engagements**: Showcases upcoming and past talks with event details
-- **About Page**: Professional experience, skills, and background
-- **Contact Form**: Interactive contact form with validation
-- **Dark Mode**: Full dark mode support with theme toggle
-- **Fully Responsive**: Optimized for all device sizes (mobile, tablet, desktop)
-- **SEO Optimized**: Proper metadata and Open Graph tags
-- **Performance**: Optimized images, code splitting, and fast page loads
+## Quick Start
 
-## Tech stack
-
-- **Framework**: [Next.js 14.2.33](https://nextjs.org/) (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Content**: Markdown processing with `marked`
-- **Testing**: Jest + React Testing Library
-- **Font**: Roboto Mono (Google Fonts)
-
-## Getting started
-
-### Prerequisites
-
-- Node.js 18+ 
-- npm, yarn, pnpm, or bun
-
-### Installation
-
-1. Clone the repository:
 ```bash
+# Clone the repository
 git clone https://github.com/ayodejidev/ayodeji.dev.git
 cd ayodeji.dev
-```
 
-2. Install dependencies:
-```bash
+# Install dependencies
 npm install
-```
 
-3. Set up environment variables:
-```bash
+# Set up environment variables
 cp .env.example .env.local
-```
+# Edit .env.local with your values
 
-4. Add your environment variables to `.env.local`:
-```env
-HASHNODE_API_KEY=your_hashnode_api_key
-NEXT_PUBLIC_HASHNODE_USERNAME=your_hashnode_username
-```
-
-### Development
-
-Run the development server:
-
-```bash
+# Run development server
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
+## Customization
 
-### Available scripts
+All customization is done through configuration files in `src/config/`:
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
-- `npm test` - Run tests
-- `npm run test:watch` - Run tests in watch mode
-- `npm run test:coverage` - Run tests with coverage report
+- `site.ts` - Site metadata, social links, branding
+- `navigation.ts` - Navigation menu
+- `projects.ts` - Your projects
+- `speaking.ts` - Speaking engagements
+- `blog.ts` - Blog configuration
 
-## Environment variables
+**📖 See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed customization guide**
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `HASHNODE_API_KEY` | Hashnode API key for fetching blog posts | Yes (for blog) |
-| `NEXT_PUBLIC_HASHNODE_USERNAME` | Hashnode username | Yes (for blog) |
+## Features
 
-
-
-
-## Contributing
-
-This is a personal portfolio website. If you find any issues or have suggestions, feel free to open an issue or submit a pull request.
+- Blog integration (Hashnode API)
+- Speaking engagements showcase
+- Projects portfolio
+- Dark mode support
+- Fully responsive
+- SEO optimized
 
 ## License
 
-MIT
+MIT License - see [LICENSE](LICENSE) file for details.
 
 ## Author
 
@@ -99,4 +59,4 @@ MIT
 
 ---
 
-Built with 💙 using Next.js and Tailwind CSS
+⭐ If you find this template helpful, please consider giving it a star!
