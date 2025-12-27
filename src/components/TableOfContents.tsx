@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import sanitizeHtml from 'sanitize-html';
 
 interface TableOfContentsProps {
   content: string | Promise<string>;
@@ -35,7 +36,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
         })
         .map((match) => {
           const level = parseInt(match[1]);
-          const text = match[2].replace(/<[^>]*>/g, ''); // Remove any HTML tags
+          const text = sanitizeHtml(match[2], { allowedTags: [], allowedAttributes: {} });
           const id = text
             .toLowerCase()
             .replace(/[^a-z0-9]+/g, '-')
@@ -50,9 +51,9 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
       const contentWithIds = contentString.replace(
         headingRegex,
         (match, level, text) => {
-          const id = text
+          const cleanText = sanitizeHtml(text, { allowedTags: [], allowedAttributes: {} });
+          const id = cleanText
             .toLowerCase()
-            .replace(/<[^>]*>/g, '')
             .replace(/[^a-z0-9]+/g, '-')
             .replace(/(^-|-$)/g, '');
           return `<h${level} id="${id}">${text}</h${level}>`;
