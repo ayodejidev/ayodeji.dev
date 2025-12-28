@@ -1,6 +1,6 @@
-# Personal Portfolio Template
+# Ayodeji.dev [Personal Portfolio]
 
-A modern, open-source personal portfolio website template built with Next.js. Perfect for developers who want to showcase their work, blog posts, speaking engagements, and projects.
+A modern, open-source personal portfolio website template built with Next.js. Perfect for developer relations professionals who want to showcase their work, blog posts, speaking engagements, and projects.
 
 ![Next.js](https://img.shields.io/badge/Next.js-14.2-black?style=flat&logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat&logo=typescript)
@@ -36,7 +36,7 @@ All customization is done through configuration files in `src/config/`:
 - `speaking.ts` - Speaking engagements
 - `blog.ts` - Blog configuration
 
-**📖 See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed customization guide**
+**📖 See [CUSTOMIZATION.md](CUSTOMIZATION.md) for detailed customization guide**
 
 ## Features
 
@@ -46,6 +46,7 @@ All customization is done through configuration files in `src/config/`:
 - Dark mode support
 - Fully responsive
 - SEO optimized
+- API endpoint for debugging (`/api/blogs/all`)
 
 ## License
 
