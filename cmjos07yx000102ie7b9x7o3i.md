@@ -6,8 +6,8 @@ datePublished: Fri Dec 06 2024 23:00:00 GMT+0000 (Coordinated Universal Time)
 cuid: cmjos07yx000102ie7b9x7o3i
 slug: reflections-on-api-days-paris-conference-2024
 canonical: https://www.linkedin.com/pulse/reflections-api-days-paris-conference-2024-ayodeji-ogundare-ufrke/
-cover: https://cdn.hashnode.com/res/hashnode/image/upload/v1767133378159/6f5161e4-b094-4985-9e79-cbcbaf8ccbce.jpeg
-ogImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1767133399474/2bc62b95-01e1-4c99-b90a-45d818e57668.jpeg
+cover: https://cdn.hashnode.com/res/hashnode/image/upload/v1767134813942/aa1d6dbb-74bd-4b33-be41-5f3ebed51ec2.png
+ogImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1767134832546/6720427c-0a98-4ea7-9eb1-f0e805d7d2c3.png
 tags: conference, apis, api-days
 
 ---
