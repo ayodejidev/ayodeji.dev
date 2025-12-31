@@ -169,7 +169,7 @@ export default function Contact() {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Get in Touch
+            Get in touch
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Have a question or want to work together? I'd love to hear from you.
@@ -301,7 +301,7 @@ export default function Contact() {
                     Sending...
                   </div>
                 ) : (
-                  'Send Message'
+                  'Send message'
                 )}
               </button>
 
@@ -338,7 +338,7 @@ export default function Contact() {
           <div className="space-y-8">
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                Connect with Me
+                Connect with me
               </h2>
               <div className="space-y-6">
                 <a

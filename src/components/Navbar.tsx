@@ -59,12 +59,12 @@ export default function Navbar() {
                   <a
                     key={link.href}
                     href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-600 hover:text-brand dark:text-gray-300 dark:hover:text-brand-light transition-all duration-200"
-                  >
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-600 hover:text-brand dark:text-gray-300 dark:hover:text-brand-light transition-all duration-200"
+            >
                     {link.label}
-                  </a>
+            </a>
                 );
               }
               return (
@@ -128,24 +128,24 @@ export default function Navbar() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-300 transform"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
+              onClick={() => setIsMenuOpen(false)}
+            >
                     {link.label}
                   </a>
                 );
               }
               return (
-                <Link
+            <Link
                   key={link.href}
                   href={link.href}
                   className={`${getMobileActiveClasses(link.href)} transition-all duration-300 transform ${
-                    isMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0'
-                  }`}
+                isMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0'
+              }`}
                   style={{ transitionDelay: isMenuOpen ? `${index * 50}ms` : '0ms' }}
-                  onClick={() => setIsMenuOpen(false)}
-                >
+              onClick={() => setIsMenuOpen(false)}
+            >
                   {link.label}
-                </Link>
+            </Link>
               );
             })}
           </div>

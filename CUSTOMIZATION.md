@@ -1,6 +1,6 @@
 # Customization Guide
 
-This guide will help you customize this portfolio template for your own personal website. All customization is done through configuration files - no need to modify complex components!
+This guide will help you customize this portfolio template for your own personal website. The core customization is done through configuration files - no need to modify complex components!
 
 ## Quick Start
 
@@ -133,7 +133,8 @@ Add your talks and speaking engagements.
 **What to change:**
 - Replace example talks with your own
 - Add upcoming and past talks
-- Include video links if available
+- Include video links if available (optional)
+- Add preview images for talks
 
 **Fields:**
 - `id`: Unique identifier (number)
@@ -141,12 +142,14 @@ Add your talks and speaking engagements.
 - `description`: Talk description
 - `date`: Date in YYYY-MM-DD format
 - `location`: Event location
-- `videoEmbedUrl`: YouTube/Vimeo embed URL (for iframe)
-- `videoUrl`: Direct video link
-- `videoTitle`: Video title
-- `image`: Talk image (URL or local path)
-- `eventUrl`: Link to event page
+- `videoEmbedUrl`: YouTube/Vimeo embed URL (for iframe) - **optional**
+- `videoUrl`: Direct video link - **optional**
+- `videoTitle`: Video title - **optional**
+- `image`: Talk image (URL or local path) - **optional**
+- `eventUrl`: Link to event page - **optional**
 - `tags`: Array of topics/tags
+
+**Note:** Video fields are optional. You can add talks without video recordings - they'll still appear on the speaking page with an "Upcoming" badge if the date is in the future.
 
 **Example:**
 ```typescript
@@ -160,7 +163,19 @@ export const talks: Talk[] = [
     videoEmbedUrl: "https://www.youtube.com/embed/video-id",
     videoUrl: "https://www.youtube.com/watch?v=video-id",
     videoTitle: "My Amazing Talk",
+    image: "/talks/my-talk.jpg",
+    eventUrl: "https://event.com/talk",
     tags: ["React", "Next.js", "Web Development"]
+  },
+  {
+    id: 2,
+    title: "Upcoming Talk Without Video",
+    description: "This talk hasn't happened yet, so no video.",
+    date: "2025-12-01",
+    location: "New York, NY",
+    image: "/talks/upcoming-talk.jpg",
+    eventUrl: "https://event.com/upcoming",
+    tags: ["AI", "Machine Learning"]
   },
 ];
 ```
@@ -183,6 +198,60 @@ export const featuredBlogIds: string[] = [
 ];
 ```
 
+### 6. Featured Content (`src/config/featured.ts`)
+
+Showcase articles, interviews, meetups, podcasts, and other content where you were featured.
+
+**What to change:**
+- Add featured content items to the `featuredItems` array
+- Items are displayed on the `/featured` page with filtering by type
+- Add preview images for better visual presentation
+
+**Fields:**
+- `id`: Unique identifier (string)
+- `title`: Title of the featured content
+- `description`: Brief description
+- `type`: Type of content - `'article' | 'interview' | 'meetup' | 'podcast' | 'video' | 'other'`
+- `url`: Link to the featured content
+- `image`: Preview image (URL or local path) - **optional**
+- `date`: Publication date in YYYY-MM-DD format
+- `publisher`: Publisher name (e.g., "CNCF", "Tech Weekly") - **optional**
+- `tags`: Array of tags - **optional**
+
+**Example:**
+```typescript
+export const featuredItems: FeaturedItem[] = [
+  {
+    id: 'cncf-article',
+    title: 'The longest-running Kubernetes Community Days is back!',
+    description: 'Guest post co-authored about organizing Kubernetes Community Days.',
+    type: 'article',
+    url: 'https://www.cncf.io/blog/2023/04/11/article',
+    image: '/featured/cncf-article.jpg',
+    date: '2023-04-11',
+    publisher: 'CNCF',
+    tags: ['Kubernetes', 'Community', 'Conference'],
+  },
+  {
+    id: 'devrel-interview',
+    title: 'From Community Building to DevRel',
+    description: 'Origin story interview about transitioning to Developer Relations.',
+    type: 'interview',
+    url: 'https://developerrelations.com/interview',
+    image: '/featured/interview.jpg',
+    date: '2023-01-28',
+    publisher: 'DeveloperRelations.com',
+    tags: ['DevRel', 'Interview', 'Community Building'],
+  },
+];
+```
+
+**Featured Page Features:**
+- All items are displayed in a single grid view
+- Filter buttons at the top allow filtering by type (All, Article, Interview, Meetup, etc.)
+- Items are automatically sorted by date (newest first)
+- Each filter shows the count of items in that category
+
 ## Customizing Pages
 
 ### About Page (`src/app/about/page.tsx`)
@@ -199,7 +268,15 @@ Edit this file to update:
 The homepage uses components that pull from your config files. The main sections are:
 - Hero section (uses `siteConfig`)
 - Recent Activity (shows recent blog posts and talks)
-- Featured sections
+
+### Featured Page (`src/app/featured/page.tsx`)
+
+The featured page displays all your featured content with filtering capabilities:
+- Shows all featured items in a responsive grid
+- Filter buttons at the top (All, Article, Interview, Meetup, Podcast, Video, Other)
+- Each filter shows the count of items
+- Items are sorted by date (newest first)
+- Click any item to open the external link
 
 ### Contact Page (`src/app/contact/page.tsx`)
 
@@ -227,7 +304,8 @@ Place your images in the `public/` folder:
 - Logo: `public/logo.png`
 - Profile image: `public/profile.png`
 - Project images: `public/images/` (or use URLs)
-- Talk images: `public/images/` (or use URLs)
+- Talk images: `public/talks/` (or use URLs)
+- Featured content images: `public/featured/` (or use URLs)
 
 ## Environment Variables
 
@@ -237,6 +315,11 @@ Create a `.env.local` file with:
 # Hashnode API (for blog integration)
 HASHNODE_API_KEY=your_hashnode_api_key
 NEXT_PUBLIC_HASHNODE_USERNAME=your_hashnode_username
+
+# Optional: Hashnode publication host
+# Set this if your publication host differs from your username
+# (e.g., if username is "ayodejidev" but host is "deji.hashnode.dev")
+NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST=deji.hashnode.dev
 
 # Optional: Your site URL
 NEXT_PUBLIC_SITE_URL=https://yourdomain.com
@@ -277,17 +360,9 @@ This endpoint helps you:
 
 ## Deployment
 
-### Vercel (Recommended)
-
-1. Push your code to GitHub
-2. Import the repository in [Vercel](https://vercel.com)
-3. Add your environment variables
-4. Deploy!
-
-### Other Platforms
-
 This is a standard Next.js app, so it can be deployed to:
 - Netlify
+- Vercel
 - AWS Amplify
 - Railway
 - Any platform that supports Next.js
@@ -309,6 +384,11 @@ Don't need certain features? Here's how to remove them:
 - Remove the Projects link from `src/config/navigation.ts`
 - Optionally delete `src/app/projects/` directory
 
+### Remove Featured Page
+- Remove the Featured link from `src/config/navigation.ts`
+- Optionally delete `src/app/featured/` directory
+- Remove `src/config/featured.ts` if not needed
+
 ### Remove Contact Form
 - Remove the Contact link from `src/config/navigation.ts`
 - Optionally delete `src/app/contact/` directory
@@ -318,17 +398,9 @@ Don't need certain features? Here's how to remove them:
 If you run into issues:
 
 1. Check the [README.md](README.md) for setup instructions
-2. Review the configuration files - most issues are configuration-related
-3. Open an issue on GitHub if you find a bug
-4. Check Next.js and Tailwind CSS documentation for framework-specific questions
+2. Open an issue on GitHub if you find a bug
+3. Check Next.js and Tailwind CSS documentation for framework-specific questions
 
-## Tips
-
-- **Start small**: Customize one section at a time
-- **Use the config files**: Don't modify components unless necessary
-- **Test locally**: Always test changes with `npm run dev` before deploying
-- **Keep it updated**: Pull latest changes from the main repository periodically
-- **Backup your config**: Keep your config files backed up - they're your customizations!
 
 ## License
 

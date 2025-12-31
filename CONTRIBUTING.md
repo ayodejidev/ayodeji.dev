@@ -22,11 +22,11 @@ We welcome feature suggestions! Please open an issue with:
 ### Pull Requests
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+2. Create a feature branch (`git checkout -b feature/proposed-feature`)
 3. Make your changes
 4. Test your changes (`npm test`)
 5. Commit with clear messages
-6. Push to your branch (`git push origin feature/amazing-feature`)
+6. Push to your branch (`git push origin feature/proposed-feature`)
 7. Open a Pull Request
 
 ## Development Setup

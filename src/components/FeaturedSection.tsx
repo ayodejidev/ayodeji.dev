@@ -32,7 +32,7 @@ export default function FeaturedSection() {
                 href="/blog"
                 className="inline-flex items-center px-6 py-3 bg-brand hover:bg-brand-dark dark:bg-brand-light dark:hover:bg-brand text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-110 hover:shadow-lg group-hover:shadow-xl"
               >
-                View Blogs
+                View blogs
                 <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
@@ -64,7 +64,7 @@ export default function FeaturedSection() {
                 href="/speaking"
                 className="inline-flex items-center px-6 py-3 bg-brand hover:bg-brand-dark dark:bg-brand-light dark:hover:bg-brand text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-110 hover:shadow-lg group-hover:shadow-xl"
               >
-                View Talks
+                View talks
                 <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
@@ -98,7 +98,7 @@ export default function FeaturedSection() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-6 py-3 bg-brand hover:bg-brand-dark dark:bg-brand-light dark:hover:bg-brand text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-110 hover:shadow-lg group-hover:shadow-xl"
               >
-                View Projects
+                View projects
                 <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
