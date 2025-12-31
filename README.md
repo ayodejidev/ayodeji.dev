@@ -2,12 +2,17 @@
 
 A modern, open-source personal portfolio website template built with Next.js. Perfect for developer relations professionals who want to showcase their work, blog posts, speaking engagements, and projects.
 
-![Next.js](https://img.shields.io/badge/Next.js-14.2-black?style=flat&logo=next.js)
+![Next.js](https://img.shields.io/badge/Next.js-16.1-black?style=flat&logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat&logo=typescript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38bdf8?style=flat&logo=tailwind-css)
 ![CI](https://github.com/ayodejidev/ayodeji.dev/actions/workflows/node-ci.yml/badge.svg)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/f8217c7b-ac3d-4a8a-9553-1c35e6829219/deploy-status)](https://app.netlify.com/projects/ayodeji-dev/deploys)
 ![License](https://img.shields.io/badge/license-MIT-green?style=flat)
+
+## Requirements
+
+- **Node.js**: >= 20.9.0 (required for Next.js 16)
+- **npm**: >= 9.0.0
 
 ## Quick Start
 

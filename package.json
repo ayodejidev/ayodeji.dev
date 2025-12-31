@@ -14,7 +14,7 @@
   "dependencies": {
     "@sendgrid/mail": "^8.1.6",
     "marked": "^15.0.12",
-    "next": "14.2.33",
+    "next": "^16.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -29,8 +29,8 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.17",
-    "eslint": "^8.56.0",
-    "eslint-config-next": "16.0.4",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^16.1.1",
     "jest": "^30.0.0",
     "jest-environment-jsdom": "^30.0.0",
     "postcss": "^8.4.35",

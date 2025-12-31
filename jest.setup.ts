@@ -32,7 +32,8 @@ jest.mock('next/navigation', () => ({
 // Mock next/image
 jest.mock('next/image', () => ({
   __esModule: true,
-  default: function Image({ src, alt, ...props }: any) {
+  default: function Image({ src, alt, priority, unoptimized, fill, sizes, ...props }: any) {
+    // Filter out Next.js-specific props that shouldn't be passed to regular img elements
     return React.createElement('img', { src, alt, ...props })
   },
 })) 
