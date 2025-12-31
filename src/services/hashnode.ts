@@ -4,6 +4,7 @@ import { blogConfig } from '@/config/blog';
 const HASHNODE_API_URL = 'https://gql.hashnode.com';
 const HASHNODE_API_KEY = process.env.HASHNODE_API_KEY;
 const HASHNODE_USERNAME = process.env.NEXT_PUBLIC_HASHNODE_USERNAME;
+const HASHNODE_PUBLICATION_HOST = process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST;
 
 // Only throw errors in development or when actually making API calls
 // During build time, we'll handle missing env vars gracefully
@@ -22,6 +23,12 @@ export interface HashnodePost {
   brief: string;
   slug: string;
   publishedAt: string;
+  updatedAt?: string;
+  readTimeInMinutes?: number;
+  author?: {
+    name: string;
+    profilePicture?: string;
+  };
   coverImage?: {
     url: string;
   };
@@ -80,6 +87,12 @@ const GET_USER_QUERY = `
                   brief
                   slug
                   publishedAt
+                  updatedAt
+                  readTimeInMinutes
+                  author {
+                    name
+                    profilePicture
+                  }
                   coverImage {
                     url
                   }
@@ -116,6 +129,13 @@ const GET_PUBLICATION_POSTS_QUERY = `
             brief
             slug
             publishedAt
+            updatedAt
+            readTimeInMinutes
+            author {
+              name
+              profilePicture
+              username
+            }
             coverImage {
               url
             }
@@ -169,14 +189,26 @@ export async function getUserData(first: number = 20, after?: string): Promise<H
   });
 
   if (!response.ok) {
-    throw new Error('Failed to fetch Hashnode data');
+    const errorText = await response.text();
+    debugLog(`HTTP Error ${response.status}: ${errorText}`);
+    throw new Error(`Failed to fetch Hashnode data: ${response.status} ${response.statusText}`);
   }
 
   const data = await response.json();
 
   if (data.errors) {
-    console.error('Hashnode API errors:', data.errors);
-    throw new Error('Hashnode API returned errors');
+    console.error('Hashnode API errors:', JSON.stringify(data.errors, null, 2));
+    // Log the first error in detail
+    if (data.errors[0]) {
+      debugLog(`GraphQL Error: ${data.errors[0].message}`);
+      if (data.errors[0].locations) {
+        debugLog(`Error location:`, data.errors[0].locations);
+      }
+      if (data.errors[0].path) {
+        debugLog(`Error path:`, data.errors[0].path);
+      }
+    }
+    throw new Error(`Hashnode API returned errors: ${data.errors[0]?.message || 'Unknown error'}`);
   }
 
   return data.data.user;
@@ -192,6 +224,13 @@ const GET_POST_BY_SLUG_QUERY = `
         brief
         slug
         publishedAt
+        updatedAt
+        readTimeInMinutes
+        totalReactions
+        author {
+          name
+          profilePicture
+        }
         coverImage {
           url
         }
@@ -295,14 +334,26 @@ async function getPublicationPosts(host: string, first: number = 20, after?: str
   });
 
   if (!response.ok) {
-    throw new Error('Failed to fetch posts from publication');
+    const errorText = await response.text();
+    debugLog(`HTTP Error ${response.status} for host ${host}: ${errorText}`);
+    throw new Error(`Failed to fetch posts from publication: ${response.status} ${response.statusText}`);
   }
 
   const data = await response.json();
 
   if (data.errors) {
-    console.error('Hashnode API errors:', data.errors);
-    throw new Error(`Hashnode API returned errors: ${JSON.stringify(data.errors)}`);
+    console.error('Hashnode API errors:', JSON.stringify(data.errors, null, 2));
+    // Log the first error in detail
+    if (data.errors[0]) {
+      debugLog(`GraphQL Error: ${data.errors[0].message}`);
+      if (data.errors[0].locations) {
+        debugLog(`Error location:`, data.errors[0].locations);
+      }
+      if (data.errors[0].path) {
+        debugLog(`Error path:`, data.errors[0].path);
+      }
+    }
+    throw new Error(`Hashnode API returned errors: ${data.errors[0]?.message || 'Unknown error'}`);
   }
 
   const publication = data.data?.publication;
@@ -355,12 +406,24 @@ export async function getPublicationHost(): Promise<string | null> {
     return host;
   } catch (error) {
     debugLog(`Error getting publication host:`, error);
-    // Fallback to constructed host
-    const fallbackHost = HASHNODE_USERNAME.includes('.hashnode.dev') 
-      ? HASHNODE_USERNAME 
-      : `${HASHNODE_USERNAME}.hashnode.dev`;
-    debugLog(`Using fallback host: ${fallbackHost}`);
-    return fallbackHost;
+    
+    // First, try environment variable if set
+    if (HASHNODE_PUBLICATION_HOST) {
+      debugLog(`Using publication host from environment: ${HASHNODE_PUBLICATION_HOST}`);
+      cachedPublicationHost = HASHNODE_PUBLICATION_HOST;
+      return HASHNODE_PUBLICATION_HOST;
+    }
+    
+    // Last resort: constructed host from username
+    if (HASHNODE_USERNAME) {
+      const fallbackHost = HASHNODE_USERNAME.includes('.hashnode.dev') 
+        ? HASHNODE_USERNAME 
+        : `${HASHNODE_USERNAME}.hashnode.dev`;
+      debugLog(`Using constructed fallback host: ${fallbackHost}`);
+      return fallbackHost;
+    }
+    
+    return null;
   }
 }
 

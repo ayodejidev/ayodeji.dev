@@ -1,7 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Roboto_Mono } from "next/font/google";
 import "./globals.css";
-import MobileMenu from "@/components/MobileMenu";
 import { ThemeProvider } from '@/components/ThemeProvider'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
@@ -46,6 +45,11 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -53,9 +57,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`scroll-smooth ${robotoMono.variable}`} suppressHydrationWarning>
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </head>
       <body className={`${robotoMono.className} antialiased`} suppressHydrationWarning>
         <ThemeProvider>
           <div className="min-h-screen flex flex-col">

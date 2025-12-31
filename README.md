@@ -6,6 +6,7 @@ A modern, open-source personal portfolio website template built with Next.js. Pe
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat&logo=typescript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38bdf8?style=flat&logo=tailwind-css)
 ![CI](https://github.com/ayodejidev/ayodeji.dev/actions/workflows/node-ci.yml/badge.svg)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f8217c7b-ac3d-4a8a-9553-1c35e6829219/deploy-status)](https://app.netlify.com/projects/ayodeji-dev/deploys)
 ![License](https://img.shields.io/badge/license-MIT-green?style=flat)
 
 ## Quick Start
@@ -35,6 +36,7 @@ All customization is done through configuration files in `src/config/`:
 - `projects.ts` - Your projects
 - `speaking.ts` - Speaking engagements
 - `blog.ts` - Blog configuration
+- `featured.ts` - Featured content (articles, interviews, meetups)
 
 **📖 See [CUSTOMIZATION.md](CUSTOMIZATION.md) for detailed customization guide**
 
@@ -42,6 +44,7 @@ All customization is done through configuration files in `src/config/`:
 
 - Blog integration (Hashnode API)
 - Speaking engagements showcase
+- Featured content page with filtering
 - Projects portfolio
 - Dark mode support
 - Fully responsive
