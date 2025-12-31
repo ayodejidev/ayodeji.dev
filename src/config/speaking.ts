@@ -40,6 +40,16 @@ export const talks: Talk[] = [
     tags: ["Open Source", "InnerSource", "Developer Experience"]
   },
   {
+    id: 3,
+    title: "Open Source and the new AI Stack: Where Developers fit in",
+    description: "The AI stack is evolving fast, leaving many developers unsure where to plug in—especially if you're not training models yourself. The good news: open source is driving the stack, and every kind of developer has a role to play. This talk breaks down the modern open source AI stack and shows how to contribute at every level—from models to tooling to developer experience. Whether you're backend, frontend, DevOps, or docs, there's a place for you.",
+    date: "2025-09-04",
+    location: "Zwolle, Netherlands",
+    image: "/talks/devpulse_3.jpeg",
+    eventUrl: "https://zwinc.nl/events/devpulse-3#aanmelden",
+    tags: ["Open Source", "AI", "Developer Experience", "Meetup"]
+  },
+  {
     id: 1,
     title: "OSCA FEST 2022 – Imagine a world without open source",
     description: "Ayodeji spoke at Open Source Community Africa's flagship event about the critical importance of open source software and how it shapes our digital world.",

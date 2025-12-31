@@ -27,6 +27,10 @@ export const navLinks: NavLink[] = [
     href: '/speaking',
   },
   {
+    label: 'Featured',
+    href: '/featured',
+  },
+  {
     label: 'Projects',
     href: 'https://github.com/ayodejidev',
     external: true,

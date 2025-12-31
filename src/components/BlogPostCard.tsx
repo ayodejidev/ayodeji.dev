@@ -1,5 +1,8 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { HashnodePost } from '@/services/hashnode';
 
 interface BlogPostCardProps {
@@ -8,15 +11,30 @@ interface BlogPostCardProps {
 }
 
 export default function BlogPostCard({ post, isFeatured = false }: BlogPostCardProps) {
-  // Calculate reading time (assuming average reading speed of 200 words per minute)
-  const wordCount = post.content?.markdown?.split(/\s+/).length || 0;
-  const readingTime = Math.ceil(wordCount / 200);
+  const router = useRouter();
+  // Use API reading time if available, otherwise calculate
+  const readingTime = post.readTimeInMinutes || (() => {
+    const wordCount = post.content?.markdown?.split(/\s+/).length || 0;
+    return Math.ceil(wordCount / 200);
+  })();
+
+  const handleCardClick = (e: React.MouseEvent) => {
+    // Don't navigate if clicking on a link or button
+    const target = e.target as HTMLElement;
+    if (target.closest('a')) {
+      return;
+    }
+    router.push(`/blog/${post.slug}`);
+  };
 
   return (
-    <article className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden group hover:shadow-lg transition-all duration-300">
-      <div className="flex flex-col md:flex-row">
+    <article 
+      className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden group hover:shadow-lg transition-all duration-300 cursor-pointer"
+      onClick={handleCardClick}
+    >
+      <div className="flex flex-col lg:flex-row">
         {/* Left: Thumbnail */}
-        <div className="relative w-full md:w-64 h-48 md:h-auto flex-shrink-0">
+        <div className="relative w-full lg:w-64 h-48 lg:h-auto flex-shrink-0">
           {post.coverImage ? (
             <Image
               src={post.coverImage.url}
@@ -61,10 +79,8 @@ export default function BlogPostCard({ post, isFeatured = false }: BlogPostCardP
             </div>
 
             {/* Title */}
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-brand dark:group-hover:text-brand-light transition-colors">
-              <Link href={`/blog/${post.slug}`}>
-                {post.title}
-              </Link>
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-brand dark:group-hover:text-brand-light transition-colors line-clamp-2">
+              {post.title}
             </h2>
             
             {/* Excerpt */}
@@ -81,6 +97,7 @@ export default function BlogPostCard({ post, isFeatured = false }: BlogPostCardP
                 <Link
                   key={tag.name}
                   href={`/blog?tag=${tag.name}`}
+                  onClick={(e) => e.stopPropagation()}
                   className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm hover:bg-brand/10 hover:text-brand dark:hover:bg-brand/20 dark:hover:text-brand-light transition-colors"
                 >
                   {tag.name}
@@ -96,6 +113,7 @@ export default function BlogPostCard({ post, isFeatured = false }: BlogPostCardP
             {/* CTA Link */}
             <Link
               href={`/blog/${post.slug}`}
+              onClick={(e) => e.stopPropagation()}
               className="inline-flex items-center gap-2 text-brand dark:text-brand-light font-medium hover:gap-3 transition-all duration-200 group/link"
             >
               Read the blog
