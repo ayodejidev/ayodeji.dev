@@ -14,14 +14,15 @@ marked.setOptions({
 });
 
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+  const { slug } = await params;
   try {
-    const post = await getPostBySlug(params.slug);
+    const post = await getPostBySlug(slug);
     
     if (!post) {
       return {
@@ -29,7 +30,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       };
     }
 
-    const postUrl = `${siteConfig.url}/blog/${params.slug}`;
+    const postUrl = `${siteConfig.url}/blog/${slug}`;
     
     return {
       title: `${post.title} | ${siteConfig.title}`,
@@ -65,11 +66,12 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const { slug } = await params;
   let post;
   let allPosts = [];
   
   try {
-    post = await getPostBySlug(params.slug);
+    post = await getPostBySlug(slug);
     allPosts = await getAllPosts();
   } catch (error) {
     console.warn('Failed to fetch blog post:', error);

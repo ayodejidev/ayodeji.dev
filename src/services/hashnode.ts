@@ -293,11 +293,8 @@ export async function getPostBySlug(slug: string): Promise<HashnodePost | null> 
   }
 
   // If not found, try direct fetch using the publication host
-  // Extract host from username (e.g., username -> username.hashnode.dev)
-  if (HASHNODE_USERNAME) {
-    const host = HASHNODE_USERNAME.includes('.hashnode.dev') 
-      ? HASHNODE_USERNAME 
-      : `${HASHNODE_USERNAME}.hashnode.dev`;
+  const host = await getPublicationHost();
+  if (host) {
     debugLog(`Post not found in paginated results, trying direct fetch for slug: ${slug}`);
     return await getPostBySlugDirect(host, slug);
   }

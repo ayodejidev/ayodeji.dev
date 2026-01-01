@@ -61,7 +61,7 @@ export default function About() {
             {/* Text Content */}
             <div>
               <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-                About Me
+                About me
               </h1>
               <p className="text-xl text-gray-600 dark:text-gray-300 mb-6">
                 I'm a Developer Advocate at Adyen and Fullstack Software Engineer.
@@ -75,7 +75,7 @@ export default function About() {
                   className="px-6 py-3 bg-brand text-white rounded-lg hover:bg-brand-dark 
                            dark:bg-brand-light dark:hover:bg-brand transition-colors"
                 >
-                  Get in Touch
+                  Get in touch
                 </Link>
                 <Link
                   href="#"
@@ -266,18 +266,12 @@ export default function About() {
           {/* Call to action */}
           <div className="text-center mt-16">
             <div className="bg-gradient-to-r from-brand/10 to-brand-light/10 dark:from-brand/5 dark:to-brand-light/5 rounded-2xl p-8">
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-                Ready to work together?
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-md mx-auto">
-                Let's discuss how we can collaborate on your next project or explore opportunities.
-              </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href="/contact"
                   className="inline-flex items-center px-6 py-3 bg-brand hover:bg-brand-dark dark:bg-brand-light dark:hover:bg-brand text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
                 >
-                  Get in Touch
+                  Contact me
                   <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
@@ -288,7 +282,7 @@ export default function About() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center px-6 py-3 border-2 border-brand dark:border-brand-light text-brand dark:text-brand-light hover:bg-brand hover:text-white dark:hover:bg-brand-light dark:hover:text-gray-900 font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
                 >
-                  Connect on LinkedIn
+                  Connect with me
                   <svg className="w-4 h-4 ml-2" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                   </svg>
@@ -303,7 +297,7 @@ export default function About() {
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-12">
-            When I'm Not Coding
+            When I'm not coding
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-sm">
@@ -311,7 +305,7 @@ export default function About() {
                 Speaking & Writing
               </h3>
               <p className="text-gray-600 dark:text-gray-300">
-                I regularly speak at tech conferences and write technical articles 
+                I speak at tech conferences and write articles 
                 to share knowledge with the developer community.
               </p>
             </div>
@@ -329,8 +323,7 @@ export default function About() {
                 Mentorship
               </h3>
               <p className="text-gray-600 dark:text-gray-300">
-                Mentoring junior developers and helping them grow in their careers 
-                through code reviews and guidance.
+                Mentoring junior developer advocates and helping them grow in their careers.
               </p>
             </div>
           </div>
