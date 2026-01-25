@@ -23,20 +23,20 @@ I had a fantastic experience at the just-concluded API Days Paris conference! Th
 * [Bruno](https://www.linkedin.com/in/bpedro/) delivered an impactful session on how API Governance Drives Quality, highlighting the key elements that define API quality and the top goals of governance frameworks.
     
 
-![](https://media.licdn.com/dms/image/v2/D4E12AQEwP0vrN4Qd-g/article-inline_image-shrink_1000_1488/article-inline_image-shrink_1000_1488/0/1733583507473?e=1768435200&v=beta&t=Fgv0O0hUFj7QZrYcT6xp8IbKwADd5qkaQBbUkErgSGg align="left")
+![Article content](https://media.licdn.com/dms/image/v2/D4E12AQEwP0vrN4Qd-g/article-inline_image-shrink_1000_1488/article-inline_image-shrink_1000_1488/0/1733583507473?e=1770854400&v=beta&t=C1BZpJx4Nt_hSZeLbgQGy75EMlLQjkNxgnJ8wAKfJuw align="left")
 
 * **Mario** took us on a fascinating journey showcasing how **DHL** delivers Best-in-Class Logistic APIs, sharing their approach to managing APIs at “planet scale”.
     
 * From the API Design track, [Mike](https://www.linkedin.com/in/mamund/) author of Design and Build Great APIs, shared practical and timely examples on designing APIs that are not only functional but also successful in the long term.
     
 
-![](https://media.licdn.com/dms/image/v2/D4E12AQGqJW5Se6mUNA/article-inline_image-shrink_1000_1488/article-inline_image-shrink_1000_1488/0/1733583352382?e=1768435200&v=beta&t=kCyoZM-uvT_ElAy-2UB3tCzaSrTi0CVM8_TBCAJi9ZY align="left")
+![Article content](https://media.licdn.com/dms/image/v2/D4E12AQGqJW5Se6mUNA/article-inline_image-shrink_1000_1488/article-inline_image-shrink_1000_1488/0/1733583352382?e=1770854400&v=beta&t=3OgjhmehDSRNq-i1gT4xbf88QVoKZCQOyWIbXTUdsVY align="left")
 
 Overall, I gained so much knowledge from this conference, from learning about several OpenAPI and DocOps initiatives to gaining fresh insights into API Governance. Most importantly, it reinforced the importance of designing and delivering quality APIs with an API-first mindset.
 
 One of the highlights of the event was meeting and exchanging ideas with amazing API experts and members of the API community.
 
-![](https://media.licdn.com/dms/image/v2/D4E12AQF9wGo4JZP5tw/article-inline_image-shrink_1000_1488/article-inline_image-shrink_1000_1488/0/1733583249211?e=1768435200&v=beta&t=mbRdgTnqAZ2-FqoFLMQycX_DfhepCIsALbMFlh6ocl4 align="left")
+![Article content](https://media.licdn.com/dms/image/v2/D4E12AQF9wGo4JZP5tw/article-inline_image-shrink_1000_1488/article-inline_image-shrink_1000_1488/0/1733583249211?e=1770854400&v=beta&t=H6JsGml0ucCpGV-RIbeYA60ZIb9m2a9KmufLMYIzC50 align="left")
 
 I’m already looking forward to attending more API Days conferences in the future! If you’re passionate about APIs, I highly recommend attending one of these events. Check out API Days [**official website**](https://www.apidays.global/paris/) for more details.
 
