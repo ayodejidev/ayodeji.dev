@@ -12,19 +12,19 @@ tags: conference, community, devrel, devrelcon
 
 ---
 
-***tl;dr*** *- I attended DevRelCon New York 2025, reconnecting with the DevRel community through insightful talks, real conversations, and shared experiences. From standout sessions on AI and storytelling to casual hallway chats and a creative magic show, the event delivered both value and connection.*
+***tl;dr*** *\- I attended DevRelCon New York 2025, reconnecting with the DevRel community through insightful talks, real conversations, and shared experiences. From standout sessions on AI and storytelling to casual hallway chats and a creative magic show, the event delivered both value and connection.*
 
 ## **Arrival and Settling In**
 
 I travelled from Amsterdam to New York with my colleague and fellow Developer Advocate, [Kwok He Chu](https://www.linkedin.com/in/kwokhechu). We arrived a couple of days before the conference to get settled and adjust to the time difference. The jet lag hit hard, but we powered through.
 
-![Photo of New York at Night](https://media.licdn.com/dms/image/v2/D4E12AQF4YnQlh8s21A/article-inline_image-shrink_1000_1488/B4EZgmEKg7GcAU-/0/1752985285084?e=1768435200&v=beta&t=CrjBsTnF8OHeV1IpQiWNkT6t7-Tza6E53keWScVdVZs align="left")
+![Photo of New York at night](https://cdn.hashnode.com/res/hashnode/image/upload/v1769373087453/ebdc5033-cbf5-4950-89bd-46babe8ae62d.jpeg align="center")
 
 This wasn’t my first time in New York, so I already had a few favorite spots in mind. The food scene remains strong; every meal was on point. I did not have any bad food. I hope this perfect streak continues 😄. [**Apollo Bagels**](https://www.apollobagels.com/) was a standout this time around. Highly recommend if you’re nearby.
 
 We worked from the [**Adyen**](https://adyen.com) New York office for a few days. It has a great rooftop view 🤩. It was also good to catch up with the New York team in person again.
 
-![Inside the Adyen New York office](https://media.licdn.com/dms/image/v2/D4E12AQEZr4Lo84Wu8Q/article-inline_image-shrink_1000_1488/B4EZgmGgUxGUAQ-/0/1752985898831?e=1768435200&v=beta&t=mZac5jRRfPW1jXBJGLRHgjI2rFk7uNEFw3whgMziB1E align="left")
+![Modern office reception area with a checkered front desk displaying the name "adyen." Behind it is an open shelving unit with plants and decor. An umbrella holder is positioned on the right.](https://cdn.hashnode.com/res/hashnode/image/upload/v1769373192171/40904b88-5177-43d4-8532-91f0a158b0cc.jpeg align="left")
 
 ## **Pre-Conference Connections**
 
@@ -36,67 +36,67 @@ We had casual conversations about our upcoming talks, current projects, open sou
 
 Day 1 started strong with a keynote from the legendary [Angie Jones](https://www.linkedin.com/in/angiejones/). She spoke about how core DevRel skills, such as storytelling, empathy, and technical translation, have helped her lead AI adoption at scale. Her talk set the tone, practical and grounded in real experience.
 
-![Photo of Angie Jones on stage](https://media.licdn.com/dms/image/v2/D4E12AQHAMpD4IzNBFA/article-inline_image-shrink_1000_1488/B4EZgmH1QtH8AQ-/0/1752986245620?e=1768435200&v=beta&t=0pfETko7rcOQzOUZ2UOBt3ZLuqcTKsEJ0YFTE2_phq8 align="left")
+![Photo of Angie Jones on stage](https://media.licdn.com/dms/image/v2/D4E12AQHAMpD4IzNBFA/article-inline_image-shrink_1000_1488/B4EZgmH1QtH8AQ-/0/1752986245620?e=1770854400&v=beta&t=NF_5Ek84-QSzO0nzooq3O8iQdKFL6rw9AWAHybwNVec align="left")
 
 After the keynote, we moved into breakout sessions. With so many good talks happening at the same time, I wish to split myself into three 😄. While I couldn’t attend everything, here are some standout sessions I joined:
 
 * [**Uttam Tripathi**](https://www.linkedin.com/in/uttamtripathi/) shared practical insights on making Developer Relations (DevRel) more effective in the AI era. His talk included real-world examples of using AI to support developers and enhance workflow efficiency.
     
 
-![Photo of Uttam on stage](https://media.licdn.com/dms/image/v2/D4E12AQEQGw9-A66msQ/article-inline_image-shrink_1000_1488/B4EZgmJJxFHoAQ-/0/1752986591520?e=1768435200&v=beta&t=AxYBlHaKiBSzsg_lJrmAgpTSNI0IdWgZ8CgvJz9WqOA align="left")
+![Photo of Uttam on stage](https://media.licdn.com/dms/image/v2/D4E12AQEQGw9-A66msQ/article-inline_image-shrink_1000_1488/B4EZgmJJxFHoAQ-/0/1752986591520?e=1770854400&v=beta&t=7G2kC31JEk25WWbpnmkEoj6f7ixPkhZhw35TZTceemE align="left")
 
 * [**Anna Filippova**](https://www.linkedin.com/in/annafilippova/) focused on proactive storytelling. She shared ways to communicate the business impact of DevRel in a clear and meaningful manner.
     
 
-![Photo of Anna on stage](https://media.licdn.com/dms/image/v2/D4E12AQFpbC8Bkn5Z1Q/article-inline_image-shrink_400_744/B4EZgmNL1FGoAY-/0/1752987648538?e=1768435200&v=beta&t=NihweMd1cQNBvEQCm-nazPITyBGxGo49OZbnmFprYMc align="left")
+![Photo of Anna on stage](https://media.licdn.com/dms/image/v2/D4E12AQFpbC8Bkn5Z1Q/article-inline_image-shrink_1500_2232/B4EZgmNL1FGoAU-/0/1752987648538?e=1770854400&v=beta&t=QXCHOEkdZ6ZbCRIdToxiZRCQ6wdneFFcI1i3Bg4yOBU align="left")
 
 * [**Greg Baugues**](https://www.linkedin.com/in/gregbaugues/) talked about starting and growing a developer-focused YouTube channel. He walked us through ideation, scripting, editing, and audience growth, with lots of actionable tips.
     
 
-![Photo of Greg on stage](https://media.licdn.com/dms/image/v2/D4E12AQEvdkJCYkM-8g/article-inline_image-shrink_400_744/B4EZgmQUrvH8Ac-/0/1752988471168?e=1768435200&v=beta&t=t3UCuVY0XR6-W5S7Kn4W1MLXKBHo4TcSkTT5nqT1qLY align="left")
+![Photo of Greg on stage](https://media.licdn.com/dms/image/v2/D4E12AQEvdkJCYkM-8g/article-inline_image-shrink_1500_2232/B4EZgmQUrvH8AY-/0/1752988471168?e=1770854400&v=beta&t=RH1xUxy0M6G8SdeN2NHStabwzgKRPLyyJygFlWCygPE align="left")
 
 * [**Stephen Chin**](https://www.linkedin.com/in/steveonjava/) introduced a developer-first funnel that connects technical engagement to broader business goals. It was a solid framework for DevRel teams trying to align with business metrics.
     
 
-![Photo of Stephen on stage](https://media.licdn.com/dms/image/v2/D4E12AQHk_ovINvwhxg/article-inline_image-shrink_1000_1488/B4EZgmRKl7HoAQ-/0/1752988692509?e=1768435200&v=beta&t=e509hlQBRGyAhMa4jlXgYhVO90Jst948ic219xBmc_4 align="left")
+![Photo of Stephen on stage](https://media.licdn.com/dms/image/v2/D4E12AQHk_ovINvwhxg/article-inline_image-shrink_1000_1488/B4EZgmRKl7HoAQ-/0/1752988692509?e=1770854400&v=beta&t=Rl3Q1zBSswHZJCTB5zu5NQwkeZjOAexHOlXV1L5Upu8 align="left")
 
 * **Anthony Dellavecchia** gave one of the most creative talks of the day. He broke down how to deliver product demos that stick using surprise, narrative, and clear value instead of just features.
     
 
-![Photo of a page from Anthony's slide](https://media.licdn.com/dms/image/v2/D4E12AQEhLFrEqtOnSQ/article-inline_image-shrink_1000_1488/B4EZgmRrpVGoAQ-/0/1752988827545?e=1768435200&v=beta&t=7Kt5Oq1CkmUG-Rl3dh3DqxJXCFnMmey0jsVo-nip5m8 align="left")
+![Photo of a page from Anthony's slide](https://media.licdn.com/dms/image/v2/D4E12AQEhLFrEqtOnSQ/article-inline_image-shrink_1000_1488/B4EZgmRrpVGoAQ-/0/1752988827545?e=1770854400&v=beta&t=ASIWJndEnO9v9VKH3MrLPKbYpjIWgp9tG3nVO1jzAkM align="left")
 
 The day ended with a hands-on keynote by [**Paige Bailey**](https://www.linkedin.com/in/dynamicwebpaige/). She demonstrated how to utilize tools like Gemini APIs and AI Studio to enhance DevRel workflows, including content creation, code samples, and more. It was practical and relevant, especially with the growing role of AI in our work.
 
-![Photo of Paige on stage](https://media.licdn.com/dms/image/v2/D4E12AQF2icWsiTW_Ug/article-inline_image-shrink_1000_1488/B4EZgmSgO3HgAQ-/0/1752989043181?e=1768435200&v=beta&t=2oDlrZhoquFtyw7Jydl-JndyttxlmpgG2g9oyDSHNW8 align="left")
+![Photo of Paige on stage](https://media.licdn.com/dms/image/v2/D4E12AQF2icWsiTW_Ug/article-inline_image-shrink_1000_1488/B4EZgmSgO3HgAQ-/0/1752989043181?e=1770854400&v=beta&t=kqG52j2EMBrvZn7D5WVWYYAmjJ9MCXaGqMKbUKFvICc align="left")
 
 ## **Day 2 Highlights**
 
 Day 2 opened with an inspiring keynote by [**Ricky Robinett**](https://www.linkedin.com/in/rickyrobinett/) titled *“****Steering Established Developer Ecosystems to New Heights****.”* He spoke directly to DevRel leaders working in mature developer communities. His focus was on building trust, identifying high-impact opportunities, and refining programs without compromising their effectiveness. Straightforward, focused, and easy to relate to.
 
-![Photo of Ricky on stage](https://media.licdn.com/dms/image/v2/D4E12AQExxl04k3N_kw/article-inline_image-shrink_1000_1488/B4EZgmTGDkH8AY-/0/1752989197812?e=1768435200&v=beta&t=-p5C2q9RA3HoGwe22ySH1ecEQ-4N1Sd1_JPyRtcYkv0 align="left")
+![Photo of Ricky on stage](https://media.licdn.com/dms/image/v2/D4E12AQExxl04k3N_kw/article-inline_image-shrink_1000_1488/B4EZgmTGDkH8AY-/0/1752989197812?e=1770854400&v=beta&t=7jQ9xwL-QVBaYjR05fGXPh-_xkKgbGLzOor4utdMMAE align="left")
 
 Here are a few more talks that I attended on day 2:
 
 * [**Dominic Nguyen**](https://www.linkedin.com/in/domyen/) shared real-world strategies for running an effective Developer Relations (DevRel) program. He drew lessons from his work on Apollo GraphQL and StorybookJS, emphasizing substance over hype and outcomes over activity.
     
 
-![Photo of Dominic on stage](https://media.licdn.com/dms/image/v2/D4E12AQFTrAzj4fEPQw/article-inline_image-shrink_1000_1488/B4EZgmVtoRGUAA-/0/1752989884630?e=1768435200&v=beta&t=wBoNQyK9Q_Cl6VOYwDbqhMhG4BnOvIuZGY_8PWZE-UQ align="left")
+![Photo of Dominic on stage](https://media.licdn.com/dms/image/v2/D4E12AQFTrAzj4fEPQw/article-inline_image-shrink_1000_1488/B4EZgmVtoRGUAA-/0/1752989884630?e=1770854400&v=beta&t=l76oSPBLlKnyFd6t8NqIlmF2eNSCTtA5OB3Pac2FJLc align="left")
 
-* [**Erica**](https://www.linkedin.com/in/hansonerica/) **Hanson****’**s talk was one of my personal favorites. Her work in Google Developer Groups influenced my journey into DevRel. She shared honest, practical insights on building and scaling developer communities, whether inside a global company like Google or a startup like Flutterflow. Her experience showed how to start from scratch, build engagement, and adapt across different environments.
+* [**Erica**](https://www.linkedin.com/in/hansonerica/) **Hanson**’s talk was one of my personal favorites. Her work in Google Developer Groups influenced my journey into DevRel. She shared honest, practical insights on building and scaling developer communities, whether inside a global company like Google or a startup like Flutterflow. Her experience showed how to start from scratch, build engagement, and adapt across different environments.
     
 
-![Photo of Erica on stage](https://media.licdn.com/dms/image/v2/D4E12AQEH-i1vFt8l1g/article-inline_image-shrink_1000_1488/B4EZgmWBvuHEAY-/0/1752989967413?e=1768435200&v=beta&t=IshCG2pEhvs-ZWbWbckBYdPb7KrxsdEijBA5WdOKENY align="left")
+![Photo of Erica on stage](https://media.licdn.com/dms/image/v2/D4E12AQEH-i1vFt8l1g/article-inline_image-shrink_1000_1488/B4EZgmWBvuHEAY-/0/1752989967413?e=1770854400&v=beta&t=Xtu3aWQt5StWFN-cTI1ILtGQV9GHoFELDP23c0qptlk align="left")
 
 * [**Pj Metz**](https://www.linkedin.com/in/metzinaround/) brought a great deal of energy to his session. He shared lessons from managing GitHub’s Campus Experts program. His talk provided clear takeaways on working with student communities that can easily be applied to broader DevRel efforts.
     
 
-![Photo of Pj on stage](https://media.licdn.com/dms/image/v2/D4E12AQGwtdzd_a81dw/article-inline_image-shrink_1000_1488/B4EZgmWVXnGcAQ-/0/1752990047354?e=1768435200&v=beta&t=WB8qsCWcbLOFEv-BHBpJ25leXRgKp7xuLNWhZayeMdQ align="left")
+![Photo of Pj on stage](https://media.licdn.com/dms/image/v2/D4E12AQGwtdzd_a81dw/article-inline_image-shrink_1000_1488/B4EZgmWVXnGcAQ-/0/1752990047354?e=1770854400&v=beta&t=uoqa70Yy4S93fhlCOAcKYlxGhO3pd1LcF_6yuftqYuA align="left")
 
 ## **The Magic Show**
 
 Yes, there was a magic show. Ricky and Greg closed out the day with a fun, unexpected performance that pulled the crowd in. To make it even better, they went ahead and shared the secrets and tricks behind the magic, as well as resources on how to get started. It was playful and memorable, a perfect way to wrap up two packed days.
 
-![Photo of Magic Show Slide](https://media.licdn.com/dms/image/v2/D4E12AQHXZvfOlXk1XA/article-inline_image-shrink_400_744/B4EZgmY6yvGwAY-/0/1752990725039?e=1768435200&v=beta&t=EkahC02DWsF2FdVPCEeoAeZUqi8Qalc7m8i80Cv7lxQ align="left")
+![Photo of Magic Show Slide](https://media.licdn.com/dms/image/v2/D4E12AQHXZvfOlXk1XA/article-inline_image-shrink_1500_2232/B4EZgmY6yvGwAU-/0/1752990725039?e=1770854400&v=beta&t=j3c4I7to3WxFpJPai4ZyKdhxSl1DliKmQjB2LnC3y0g align="left")
 
 ## **My Top 5 Takeaways**
 
@@ -115,7 +115,7 @@ Yes, there was a magic show. Ricky and Greg closed out the day with a fun, unexp
 
 One of the best parts of DevRelCon was the people. It was great to reconnect with familiar faces and meet new folks doing meaningful DevRel work across different roles and companies.
 
-![ACW for Right - Vishal, Angie, Anthony, Kwok, Ayodeji](https://media.licdn.com/dms/image/v2/D4E12AQHXnOWqcgHpaQ/article-inline_image-shrink_1000_1488/B4EZgmaKs5GwAQ-/0/1752991053340?e=1768435200&v=beta&t=OAf9NBYCzmYweN-ntnHHp9UNSZWqJUw_VW2eSR5KSeU align="left")
+![ACW for Right - Vishal, Angie, Anthony, Kwok, Ayodeji](https://media.licdn.com/dms/image/v2/D4E12AQHXnOWqcgHpaQ/article-inline_image-shrink_1000_1488/B4EZgmaKs5GwAQ-/0/1752991053340?e=1770854400&v=beta&t=rIPoSYOWz6zQOSMXVVr9A1yZ4_o_qy3SOVgUg21ifHk align="left")
 
 Conversations flowed during breaks, hallway chats, and spontaneous group lunches. Whether we were discussing content strategy, open source, developer experience, community challenges, or simply swapping stories from the field, the energy was palpable.
 
@@ -129,7 +129,7 @@ It created a casual, low-pressure way to connect around hiring. I snapped a phot
 
 Feel free to zoom in to explore the listings or analyze the image with your favorite LLM tool if you're feeling curious. You might spot a lead worth following.
 
-![Job board at DevRelCon NY 2025](https://media.licdn.com/dms/image/v2/D4E12AQEAfDM99Y9Twg/article-inline_image-shrink_1000_1488/B4EZgmca2TGoAQ-/0/1752991644234?e=1768435200&v=beta&t=pY4j_cK_E7vbm-zmU97hEyJ6m4J4eTIxue2bEVTYd_c align="left")
+![Job board at DevRelCon NY 2025](https://media.licdn.com/dms/image/v2/D4E12AQEAfDM99Y9Twg/article-inline_image-shrink_1000_1488/B4EZgmca2TGoAQ-/0/1752991644234?e=1770854400&v=beta&t=ff3QIf-JfJ0-cuFoXJV0txeCd-Eg1QQW-SXzEPuOOAQ align="left")
 
 ## **Final Thoughts**
 
