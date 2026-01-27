@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@sendgrid/mail": "^8.1.6",
-    "marked": "^15.0.12",
+    "marked": "^17.0.1",
     "next": "^16.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
