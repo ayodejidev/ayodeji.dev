@@ -35,13 +35,13 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
         })
         .map((match) => {
           const level = parseInt(match[1]);
-          const text = match[2].replace(/<[^>]*>/g, ''); // Remove any HTML tags
-          const id = text
+          const headingText = match[2].replace(/<[^>]*>/g, ''); // Remove any HTML tags
+          const id = headingText
             .toLowerCase()
             .replace(/[^a-z0-9]+/g, '-')
             .replace(/(^-|-$)/g, '');
           
-          return { id, text, level };
+          return { id, text: headingText, level };
         });
 
       setHeadings(mainHeadings);
@@ -50,9 +50,9 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
       const contentWithIds = contentString.replace(
         headingRegex,
         (match, level, text) => {
-          const id = text
+          const innerText = text.replace(/<[^>]*>/g, ''); // Remove any HTML tags before slugging
+          const id = innerText
             .toLowerCase()
-            .replace(/<[^>]*>/g, '')
             .replace(/[^a-z0-9]+/g, '-')
             .replace(/(^-|-$)/g, '');
           return `<h${level} id="${id}">${text}</h${level}>`;
