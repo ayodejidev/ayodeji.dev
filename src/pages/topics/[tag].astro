@@ -1,0 +1,18 @@
+---
+import ContentRecordCard from '../../components/ContentRecordCard.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getContentRecords, getTopics, topicLabel } from '../../lib/content';
+
+export async function getStaticPaths() {
+  return (await getTopics()).map(({ tag }) => ({ params: { tag } }));
+}
+const { tag } = Astro.params;
+if (!tag) throw new Error('Missing topic');
+const records = (await getContentRecords()).filter((record) => record.tags.includes(tag));
+const label = topicLabel(tag);
+---
+<BaseLayout title={`${label} — Topics`} description={`Articles, talks, projects, and featured work about ${label}.`}>
+  <PageHeader title={label} description={`${records.length} ${records.length === 1 ? 'item' : 'items'} across writing, speaking, projects, and featured work.`} eyebrow="Topic" />
+  <section class="section shell"><div class="card-grid">{records.map((record) => <ContentRecordCard record={record} />)}</div></section>
+</BaseLayout>

@@ -1,0 +1,55 @@
+---
+interface Heading { depth: number; slug: string; text: string; }
+interface Props { headings: Heading[]; }
+const headings = Astro.props.headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
+---
+{headings.length > 0 && (
+  <details class="article-toc toc-mobile">
+    <summary>On this page</summary>
+    <nav aria-label="Table of contents">
+      <ol>{headings.map((heading) => <li class:list={[`toc-depth-${heading.depth}`]}><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol>
+    </nav>
+  </details>
+)}
+{headings.length > 0 && (
+  <aside class="article-toc toc-desktop" aria-label="Table of contents">
+    <strong>On this page</strong>
+    <ol>{headings.map((heading) => <li class:list={[`toc-depth-${heading.depth}`]}><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol>
+  </aside>
+)}
+<script is:inline>
+  (() => {
+    const article = document.querySelector('[data-longform]');
+    if (!article || article.dataset.enhanced === 'true') return;
+    article.dataset.enhanced = 'true';
+
+    for (const heading of article.querySelectorAll('h2[id], h3[id]')) {
+      const anchor = document.createElement('a');
+      anchor.className = 'heading-anchor';
+      anchor.href = `#${heading.id}`;
+      anchor.setAttribute('aria-label', `Link to ${heading.textContent?.trim() ?? 'section'}`);
+      anchor.textContent = '#';
+      heading.append(anchor);
+    }
+
+    for (const block of article.querySelectorAll('pre')) {
+      if (block.querySelector('[data-copy-code]')) continue;
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'copy-code';
+      button.dataset.copyCode = '';
+      button.textContent = 'Copy';
+      button.addEventListener('click', async () => {
+        const code = block.querySelector('code')?.textContent ?? block.textContent ?? '';
+        try {
+          await navigator.clipboard.writeText(code);
+          button.textContent = 'Copied';
+        } catch {
+          button.textContent = 'Copy failed';
+        }
+        window.setTimeout(() => { button.textContent = 'Copy'; }, 1500);
+      });
+      block.append(button);
+    }
+  })();
+</script>

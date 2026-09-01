@@ -1,0 +1,35 @@
+---
+import { render } from 'astro:content';
+import ArticleCard from '../../components/ArticleCard.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getBlogPosts, getPage } from '../../lib/content';
+const page = await getPage('blog');
+const { Content } = await render(page);
+const posts = await getBlogPosts();
+---
+<BaseLayout title={page.data.title} description={page.data.description}>
+  <PageHeader {...page.data} />
+  <div class="shell content-page"><Content /></div>
+  <section class="section shell">
+    <label for="blog-filter" class="eyebrow">Filter articles</label>
+    <input id="blog-filter" class="filter" type="search" placeholder="Search titles, descriptions, and tags" autocomplete="off" />
+    <div class="card-list" data-blog-list style="margin-top: 1rem">{posts.map((post) => <ArticleCard post={post} horizontal />)}</div>
+    <p class="empty-state" data-empty hidden>No articles match that search.</p>
+  </section>
+  <script is:inline>
+    const input = document.querySelector('#blog-filter');
+    const cards = [...document.querySelectorAll('[data-search]')];
+    const empty = document.querySelector('[data-empty]');
+    input?.addEventListener('input', () => {
+      const query = input.value.trim().toLowerCase();
+      let visible = 0;
+      for (const card of cards) {
+        const show = !query || card.dataset.search.includes(query);
+        card.hidden = !show;
+        if (show) visible += 1;
+      }
+      empty.hidden = visible !== 0;
+    });
+  </script>
+</BaseLayout>

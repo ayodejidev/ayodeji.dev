@@ -1,0 +1,7 @@
+---
+import { getAliases } from '../lib/content';
+export async function getStaticPaths() {
+  return (await getAliases()).map(({ alias, target }) => ({ params: { alias: alias.slice(1) }, props: { target } }));
+}
+return Astro.redirect(Astro.props.target, 301);
+---

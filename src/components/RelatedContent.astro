@@ -1,0 +1,22 @@
+---
+import type { ContentRecord } from '../lib/content';
+interface Props { records: ContentRecord[]; }
+const { records } = Astro.props;
+const labels = { article: 'Article', event: 'Talk', featured: 'Featured', project: 'Project' } as const;
+---
+{records.length > 0 && (
+  <section class="related-content shell" aria-labelledby="related-title">
+    <div class="section-heading"><h2 id="related-title">Related work</h2></div>
+    <div class="related-grid">
+      {records.map((record) => (
+        <article class="card related-card">
+          <div class="card-body">
+            <p class="eyebrow">{labels[record.type]}</p>
+            <h3><a href={record.url}>{record.title}{record.type === 'featured' ? ' ↗' : ''}</a></h3>
+            <p>{record.description}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+)}

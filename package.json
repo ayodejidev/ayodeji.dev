@@ -1,41 +1,31 @@
 {
-  "name": "ayodeji-dev",
-  "version": "0.2.0",
-  "private": false,
+  "name": "ayodeji-dev-astro-v3",
+  "version": "0.3.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "24.19.x",
+    "npm": ">=10.8.2"
+  },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "dev": "astro dev",
+    "build": "astro check && astro build && node scripts/verify-build.mjs && node scripts/check-links.mjs",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test": "node --test tests/*.test.mjs",
+    "content:audit": "node scripts/audit-content.mjs",
+    "content:new": "node scripts/new-content.mjs",
+    "check:links": "node scripts/check-links.mjs",
+    "verify:determinism": "node scripts/verify-determinism.mjs"
   },
   "dependencies": {
-    "@sendgrid/mail": "^8.1.6",
-    "marked": "^15.0.12",
-    "next": "^16.1.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@astrojs/rss": "4.0.19",
+    "@astrojs/sitemap": "3.7.3",
+    "astro": "7.2.4"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.0.0",
-    "@tailwindcss/forms": "^0.5.10",
-    "@tailwindcss/typography": "^0.5.16",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.3.0",
-    "@types/jest": "^29.5.14",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "autoprefixer": "^10.4.17",
-    "eslint": "^9.0.0",
-    "eslint-config-next": "^16.1.1",
-    "jest": "^30.0.0",
-    "jest-environment-jsdom": "^30.0.0",
-    "postcss": "^8.4.35",
-    "sharp": "^0.34.2",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "@astrojs/check": "0.9.10",
+    "typescript": "6.0.3",
+    "yaml": "2.9.0"
   }
 }

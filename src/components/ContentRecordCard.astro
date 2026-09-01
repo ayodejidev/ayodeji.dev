@@ -1,0 +1,16 @@
+---
+import type { ContentRecord } from '../lib/content';
+import { formatDate } from '../lib/format';
+import { topicLabel } from '../lib/content';
+interface Props { record: ContentRecord; }
+const { record } = Astro.props;
+const labels = { article: 'Article', event: 'Talk', featured: 'Featured', project: 'Project' } as const;
+---
+<article class="card record-card">
+  <div class="card-body">
+    <div class="meta"><span>{labels[record.type]}</span>{record.date && <span> · <time datetime={record.date}>{formatDate(new Date(record.date))}</time></span>}</div>
+    <h2><a href={record.url}>{record.title}{record.type === 'featured' ? ' ↗' : ''}</a></h2>
+    <p>{record.description}</p>
+    <div class="tag-row">{record.tags.slice(0, 5).map((tag) => <a href={`/topics/${tag}`}>#{topicLabel(tag)}</a>)}</div>
+  </div>
+</article>

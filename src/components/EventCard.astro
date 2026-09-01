@@ -1,0 +1,19 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { formatDate } from '../lib/format';
+import { eventTiming, slugFor, topicLabel, type EventTiming } from '../lib/content';
+interface Props { event: CollectionEntry<'events'>; timing?: EventTiming; showImage?: boolean; }
+const { event, timing = eventTiming(event.data.date), showImage = true } = Astro.props;
+---
+<article class="card horizontal-card">
+  {showImage && event.data.cover && <a class="card-media" href={`/speaking/${slugFor(event)}`} tabindex="-1"><Image src={event.data.cover} alt={event.data.coverAlt ?? ''} loading="lazy" widths={[480, 800]} sizes="(max-width: 680px) 100vw, 28vw" /></a>}
+  <div class="card-body">
+    <span class:list={['talk-status', timing]}>{timing === 'upcoming' ? 'Upcoming' : 'Past talk'}</span>
+    <div class="meta"><time datetime={event.data.date.toISOString()}>{formatDate(event.data.date)}</time> · {event.data.location}</div>
+    <h2><a href={`/speaking/${slugFor(event)}`}>{event.data.title}</a></h2>
+    <p>{event.data.description}</p>
+    <div class="tag-row">{event.data.tags.map((tag) => <a href={`/topics/${tag}`}>#{topicLabel(tag)}</a>)}</div>
+    <div class="link-row"><a href={`/speaking/${slugFor(event)}`}>Talk details →</a>{event.data.videoUrl && <a href={event.data.videoUrl}>Watch talk ↗</a>}{event.data.eventUrl && <a href={event.data.eventUrl}>Event details ↗</a>}</div>
+  </div>
+</article>

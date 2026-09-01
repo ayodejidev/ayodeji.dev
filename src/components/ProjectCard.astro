@@ -1,0 +1,15 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { topicLabel } from '../lib/content';
+interface Props { project: CollectionEntry<'projects'>; }
+const { project } = Astro.props;
+---
+<article class="card project-card">
+  <div class="project-mark" aria-hidden="true">⌘</div>
+  <div class="card-body">
+    <h2>{project.data.title}</h2>
+    <p>{project.data.description}</p>
+    <div class="tag-row">{project.data.tags.map((tag) => <a href={`/topics/${tag}`}>#{topicLabel(tag)}</a>)}</div>
+    <div class="link-row"><a href={project.data.link}>View project ↗</a>{project.data.github && project.data.github !== project.data.link && <a href={project.data.github}>GitHub ↗</a>}</div>
+  </div>
+</article>
