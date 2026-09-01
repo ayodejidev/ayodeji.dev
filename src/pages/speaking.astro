@@ -1,0 +1,21 @@
+---
+import { render } from 'astro:content';
+import EventCard from '../components/EventCard.astro';
+import PageHeader from '../components/PageHeader.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { eventTiming, getEvents, getPage } from '../lib/content';
+
+const page = await getPage('speaking');
+const { Content } = await render(page);
+const events = await getEvents();
+const now = new Date();
+const upcoming = events.filter((event) => eventTiming(event.data.date, now) === 'upcoming');
+const past = events.filter((event) => eventTiming(event.data.date, now) === 'past');
+---
+<BaseLayout title={page.data.title} description={page.data.description}>
+  <PageHeader {...page.data} /><div class="shell content-page"><Content /></div>
+  <div class="speaking-groups shell">
+    {upcoming.length > 0 && <section class="section" aria-labelledby="upcoming-talks"><div class="section-heading"><h2 id="upcoming-talks">Upcoming talks</h2></div><div class="card-list">{upcoming.map((event) => <EventCard event={event} timing="upcoming" showImage={false} />)}</div></section>}
+    {past.length > 0 && <section class="section" aria-labelledby="past-talks"><div class="section-heading"><h2 id="past-talks">Past talks</h2></div><div class="card-list">{past.map((event) => <EventCard event={event} timing="past" showImage={false} />)}</div></section>}
+  </div>
+</BaseLayout>

@@ -1,0 +1,46 @@
+---
+import { Image } from 'astro:assets';
+import { render } from 'astro:content';
+import ArticleEnhancements from '../../components/ArticleEnhancements.astro';
+import RelatedContent from '../../components/RelatedContent.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site';
+import { formatDate, canonical } from '../../lib/format';
+import { eventTiming, getEvents, getRelatedRecords, slugFor, topicLabel } from '../../lib/content';
+
+export async function getStaticPaths() {
+  return (await getEvents()).map((event) => ({ params: { slug: slugFor(event) }, props: { event } }));
+}
+
+const { event } = Astro.props;
+const { Content, headings } = await render(event);
+const path = `/speaking/${slugFor(event)}`;
+const url = canonical(path);
+const related = await getRelatedRecords(path, event.data.tags);
+const timing = eventTiming(event.data.date);
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: event.data.title,
+  description: event.data.description,
+  startDate: event.data.date.toISOString(),
+  eventStatus: timing === 'upcoming' ? 'https://schema.org/EventScheduled' : 'https://schema.org/EventCompleted',
+  location: { '@type': 'Place', name: `${event.data.event}, ${event.data.location}` },
+  performer: { '@type': 'Person', name: site.name, url: site.url },
+  url,
+  image: event.data.cover ? new URL(event.data.cover.src, site.url).toString() : undefined,
+};
+---
+<BaseLayout title={event.data.title} description={event.data.description} image={event.data.cover?.src} type="article" publishedAt={event.data.date} tags={event.data.tags} jsonLd={jsonLd}>
+  <header class="article-header shell">
+    <p class="eyebrow">{timing === 'upcoming' ? 'Upcoming talk' : 'Past talk'} · {event.data.event}</p>
+    <h1>{event.data.title}</h1>
+    <p class="lede">{event.data.description}</p>
+    <div class="meta"><time datetime={event.data.date.toISOString()}>{formatDate(event.data.date)}</time> · {event.data.location}</div>
+    <div class="tag-row">{event.data.tags.map((tag) => <a href={`/topics/${tag}`}>#{topicLabel(tag)}</a>)}</div>
+    <div class="link-row">{event.data.slidesUrl && <a class="button secondary" href={event.data.slidesUrl}>View slides ↗</a>}{event.data.videoUrl && <a class="button secondary" href={event.data.videoUrl}>Watch recording ↗</a>}{event.data.eventUrl && <a class="button secondary" href={event.data.eventUrl}>Event page ↗</a>}</div>
+  </header>
+  {event.data.cover && <figure class="article-cover"><Image src={event.data.cover} alt={event.data.coverAlt ?? ''} widths={[768, 1120, 1600]} sizes="(max-width: 1120px) 100vw, 1120px" /></figure>}
+  <div class="article-grid shell"><ArticleEnhancements headings={headings} /><article class="prose" data-longform><Content /></article></div>
+  <RelatedContent records={related} />
+</BaseLayout>

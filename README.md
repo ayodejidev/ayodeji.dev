@@ -1,71 +1,34 @@
-# Ayodeji.dev [Personal Portfolio]
+# ayodeji.dev
 
-A modern, open-source personal portfolio website template built with Next.js. Perfect for developer relations professionals who want to showcase their work, blog posts, speaking engagements, and projects.
+Ayodeji Ogundare’s home on the web: writing, talks, open-source work, and projects from a Developer Advocate and full-stack engineer.
 
-![Next.js](https://img.shields.io/badge/Next.js-16.1-black?style=flat&logo=next.js)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat&logo=typescript)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38bdf8?style=flat&logo=tailwind-css)
-![CI](https://github.com/ayodejidev/ayodeji.dev/actions/workflows/node-ci.yml/badge.svg)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/f8217c7b-ac3d-4a8a-9553-1c35e6829219/deploy-status)](https://app.netlify.com/projects/ayodeji-dev/deploys)
-![License](https://img.shields.io/badge/license-MIT-green?style=flat)
+The site is built with Astro and plain CSS. Its content lives in this repository as Markdown, so publishing does not depend on a CMS or client-side framework.
 
-## Requirements
+## Local development
 
-- **Node.js**: >= 20.9.0 (required for Next.js 16)
-- **npm**: >= 9.0.0
+Requires Node.js `24.19.x` and npm `>=10.8.2`.
 
-## Quick Start
-
-```bash
-# Clone the repository
-git clone https://github.com/ayodejidev/ayodeji.dev.git
-cd ayodeji.dev
-
-# Install dependencies
-npm install
-
-# Set up environment variables
-cp .env.example .env.local
-# Edit .env.local with your values
-
-# Run development server
+```sh
+npm ci
 npm run dev
 ```
 
-## Customization
+## Publish content
 
-All customization is done through configuration files in `src/config/`:
+Content lives in `src/content/{blog,events,featured,pages,projects}`. Create new work as a draft:
 
-- `site.ts` - Site metadata, social links, branding
-- `navigation.ts` - Navigation menu
-- `projects.ts` - Your projects
-- `speaking.ts` - Speaking engagements
-- `blog.ts` - Blog configuration
-- `featured.ts` - Featured content (articles, interviews, meetups)
+```sh
+npm run content:new -- blog my-article
+npm run content:new -- events my-talk
+```
 
-**📖 See [CUSTOMIZATION.md](CUSTOMIZATION.md) for detailed customization guide**
+Posts, talks, featured work, and projects keep their `index.md` and images together. Set `draft: false` only when an entry is ready to publish.
 
-## Features
+## Ship safely
 
-- Blog integration (Hashnode API)
-- Speaking engagements showcase
-- Featured content page with filtering
-- Projects portfolio
-- Dark mode support
-- Fully responsive
-- SEO optimized
-- API endpoint for debugging (`/api/blogs/all`)
-
-## License
-
-MIT License - see [LICENSE](LICENSE) file for details.
-
-## Author
-
-**Ayodeji Ogundare**
-- Website: [ayodeji.dev](https://ayodeji.dev)
-- GitHub: [@ayodejidev](https://github.com/ayodejidev)
-
----
-
-⭐ If you find this template helpful, please consider giving it a star!
+```sh
+npm run check
+npm test
+npm run content:audit
+npm run build
+```

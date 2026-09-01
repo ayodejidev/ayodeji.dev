@@ -1,0 +1,44 @@
+---
+import { Image } from 'astro:assets';
+import { render } from 'astro:content';
+import ArticleEnhancements from '../../components/ArticleEnhancements.astro';
+import RelatedContent from '../../components/RelatedContent.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getBlogPosts, getRelatedRecords, slugFor, topicLabel } from '../../lib/content';
+import { formatDate, canonical } from '../../lib/format';
+import { site } from '../../data/site';
+
+export async function getStaticPaths() {
+  return (await getBlogPosts()).map((post) => ({ params: { slug: slugFor(post) }, props: { post } }));
+}
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+const url = canonical(`/blog/${slugFor(post)}`);
+const related = await getRelatedRecords(`/blog/${slugFor(post)}`, post.data.tags);
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.publishedAt.toISOString(),
+  dateModified: (post.data.updatedAt ?? post.data.publishedAt).toISOString(),
+  author: { '@type': 'Person', name: site.name, url: site.url },
+  mainEntityOfPage: url,
+  image: post.data.cover ? new URL(post.data.cover.src, site.url).toString() : undefined,
+};
+---
+<BaseLayout title={post.data.title} description={post.data.description} image={post.data.cover?.src} type="article" publishedAt={post.data.publishedAt} updatedAt={post.data.updatedAt} tags={post.data.tags} jsonLd={jsonLd}>
+  <header class="article-header shell">
+    <p class="eyebrow">Article</p>
+    <h1>{post.data.title}</h1>
+    <p class="lede">{post.data.description}</p>
+    <div class="meta"><time datetime={post.data.publishedAt.toISOString()}>{formatDate(post.data.publishedAt)}</time>{post.data.readingMinutes && <span> · {post.data.readingMinutes} min read</span>}</div>
+    <div class="tag-row">{post.data.tags.map((tag) => <a href={`/topics/${tag}`}>#{topicLabel(tag)}</a>)}</div>
+  </header>
+  {post.data.cover && <figure class="article-cover"><Image src={post.data.cover} alt={post.data.coverAlt ?? ''} widths={[768, 1120, 1600]} sizes="(max-width: 1120px) 100vw, 1120px" /></figure>}
+  <div class="article-grid shell">
+    <ArticleEnhancements headings={headings} />
+    <article class="prose" data-longform><Content />{post.data.originalUrl && <p class="article-source">Originally published at <a href={post.data.originalUrl}>{new URL(post.data.originalUrl).hostname}</a>.</p>}</article>
+  </div>
+  <RelatedContent records={related} />
+</BaseLayout>

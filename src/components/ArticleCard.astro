@@ -1,0 +1,19 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { formatDate } from '../lib/format';
+import { slugFor, topicLabel } from '../lib/content';
+interface Props { post: CollectionEntry<'blog'>; compact?: boolean; horizontal?: boolean; }
+const { post, compact = false, horizontal = false } = Astro.props;
+const slug = slugFor(post);
+---
+<article class:list={['card', 'article-card', { compact, 'horizontal-card': horizontal }]} data-search={`${post.data.title} ${post.data.description} ${post.data.tags.join(' ')}`.toLowerCase()}>
+  {post.data.cover && <a class="card-media" href={`/blog/${slug}`} tabindex="-1"><Image src={post.data.cover} alt={post.data.coverAlt ?? ''} loading="lazy" widths={[480, 800]} sizes={horizontal ? '(max-width: 680px) 100vw, 28vw' : '(max-width: 680px) 100vw, 50vw'} /></a>}
+  <div class="card-body">
+    <div class="meta"><time datetime={post.data.publishedAt.toISOString()}>{formatDate(post.data.publishedAt)}</time>{post.data.readingMinutes && <span> · {post.data.readingMinutes} min read</span>}</div>
+    <h2><a href={`/blog/${slug}`}>{post.data.title}</a></h2>
+    <p>{post.data.description}</p>
+    <div class="tag-row">{post.data.tags.slice(0, 4).map((tag) => <a href={`/topics/${tag}`}>#{topicLabel(tag)}</a>)}</div>
+    {horizontal && <div class="link-row"><a href={`/blog/${slug}`}>Read article →</a></div>}
+  </div>
+</article>

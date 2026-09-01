@@ -1,0 +1,7 @@
+---
+import { getTopics } from '../../../lib/content';
+export async function getStaticPaths() {
+  return (await getTopics()).map(({ tag }) => ({ params: { tag } }));
+}
+return Astro.redirect(`/topics/${Astro.params.tag}`, 301);
+---

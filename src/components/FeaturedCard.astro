@@ -1,0 +1,16 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { formatDate } from '../lib/format';
+interface Props { item: CollectionEntry<'featured'>; }
+const { item } = Astro.props;
+---
+<article class="card">
+  {item.data.image && <a class="card-media" href={item.data.url}><Image src={item.data.image} alt={item.data.imageAlt ?? ''} loading="lazy" widths={[480, 800]} sizes="(max-width: 680px) 100vw, 50vw" /></a>}
+  <div class="card-body">
+    <div class="meta">{item.data.type} · {formatDate(item.data.date)}</div>
+    <h2><a href={item.data.url}>{item.data.title} ↗</a></h2>
+    <p>{item.data.description}</p>
+    {item.data.publisher && <strong class="publisher">{item.data.publisher}</strong>}
+  </div>
+</article>
