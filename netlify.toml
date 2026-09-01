@@ -4,6 +4,8 @@
 
 [build.environment]
   NODE_VERSION = "24.19.0"
+  # The Netlify UI still has the Next.js runtime from the previous site.
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
 
 [[redirects]]
   from = "/about"

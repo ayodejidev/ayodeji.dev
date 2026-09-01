@@ -42,11 +42,12 @@ test('content rules reject unsafe editorial states', () => {
 
 test('active site has no standalone About page or legacy runtime dependency', async () => {
   await assert.rejects(access(new URL('src/pages/about.astro', root)));
-  const [navigation, indexPage, llms, packageSource] = await Promise.all([
+  const [navigation, indexPage, llms, packageSource, netlifyConfig] = await Promise.all([
     readFile(new URL('src/data/navigation.ts', root), 'utf8'),
     readFile(new URL('src/pages/index.astro', root), 'utf8'),
     readFile(new URL('src/pages/llms.txt.ts', root), 'utf8'),
     readFile(new URL('package.json', root), 'utf8'),
+    readFile(new URL('netlify.toml', root), 'utf8'),
   ]);
   assert(!/href:\s*['"]\/about['"]/u.test(navigation));
   assert.match(indexPage, /id="about"/u);
@@ -54,4 +55,5 @@ test('active site has no standalone About page or legacy runtime dependency', as
   const packageJson = JSON.parse(packageSource);
   const dependencies = { ...packageJson.dependencies, ...packageJson.devDependencies };
   for (const name of ['next', 'react', 'react-dom', 'tailwindcss', 'fuse.js']) assert(!(name in dependencies));
+  assert.match(netlifyConfig, /NETLIFY_NEXT_PLUGIN_SKIP\s*=\s*"true"/u);
 });
