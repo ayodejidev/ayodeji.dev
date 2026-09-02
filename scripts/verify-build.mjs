@@ -50,11 +50,12 @@ assert(index.records.filter((record) => record.type === 'event').every((record) 
 const home = await readFile(new URL('index.html', dist), 'utf8');
 assert.match(home, /id=["']about["']/u);
 const sitemap = await readFile(new URL('sitemap-0.xml', dist), 'utf8');
+const sitemapLocs = new Set(Array.from(sitemap.matchAll(/<loc>([^<]+)<\/loc>/giu), ([, loc]) => loc));
 assert(!sitemap.includes('https://ayodeji.dev/about'));
 assert(!sitemap.includes('/blog/tags/'));
 assert(!sitemap.includes('<loc>https://ayodeji.dev/topics</loc>'));
 assert(!sitemap.includes('<loc>https://ayodeji.dev/projects</loc>'));
 assert(!sitemap.includes('<loc>https://ayodeji.dev/project</loc>'));
-assert(sitemap.includes('https://ayodeji.dev/topics/open-source'));
-assert(sitemap.includes('https://ayodeji.dev/speaking/innersource-by-design'));
+assert(sitemapLocs.has('https://ayodeji.dev/topics/open-source'));
+assert(sitemapLocs.has('https://ayodeji.dev/speaking/innersource-by-design'));
 console.log(`Verified ${required.length} required outputs, ${htmlFiles.length} HTML documents, ${feed.items.length} feed items, and ${index.records.length} discovery records.`);
