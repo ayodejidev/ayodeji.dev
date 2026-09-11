@@ -7,13 +7,14 @@ const labels = { article: 'Article', event: 'Talk', featured: 'Featured', projec
 {records.length > 0 && (
   <section class="related-content shell" aria-labelledby="related-title">
     <div class="section-heading"><h2 id="related-title">Related work</h2></div>
-    <div class="related-grid">
+    <div class="related-grid" data-count={records.length}>
       {records.map((record) => (
         <article class="card related-card">
           <div class="card-body">
             <p class="eyebrow">{labels[record.type]}</p>
             <h3><a href={record.url}>{record.title}{record.type === 'featured' ? ' ↗' : ''}</a></h3>
             <p>{record.description}</p>
+            <div class="link-row"><a href={record.url}>{record.type === 'event' ? 'Talk details →' : record.type === 'featured' ? 'View ↗' : record.type === 'project' ? 'View project →' : 'Read article →'}</a></div>
           </div>
         </article>
       ))}

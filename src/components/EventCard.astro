@@ -6,10 +6,10 @@ import { eventTiming, slugFor, topicLabel, type EventTiming } from '../lib/conte
 interface Props { event: CollectionEntry<'events'>; timing?: EventTiming; showImage?: boolean; }
 const { event, timing = eventTiming(event.data.date), showImage = true } = Astro.props;
 ---
-<article class="card horizontal-card">
+<article class="card horizontal-card" data-event-card data-event-date={event.data.date.toISOString()}>
   {showImage && event.data.cover && <a class="card-media" href={`/speaking/${slugFor(event)}`} tabindex="-1"><Image src={event.data.cover} alt={event.data.coverAlt ?? ''} loading="lazy" widths={[480, 800]} sizes="(max-width: 680px) 100vw, 28vw" /></a>}
   <div class="card-body">
-    <span class:list={['talk-status', timing]}>{timing === 'upcoming' ? 'Upcoming' : 'Past talk'}</span>
+    <span class:list={['talk-status', timing]} data-event-status>{timing === 'upcoming' ? 'Upcoming' : 'Past talk'}</span>
     <div class="meta"><time datetime={event.data.date.toISOString()}>{formatDate(event.data.date)}</time> · {event.data.location}</div>
     <h2><a href={`/speaking/${slugFor(event)}`}>{event.data.title}</a></h2>
     <p>{event.data.description}</p>
