@@ -37,8 +37,8 @@ const socialImage = new URL(image, site.url);
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#11100e" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f3f6f9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#001838" media="(prefers-color-scheme: dark)" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/icon.png" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-icon.png" />
@@ -77,6 +77,35 @@ const socialImage = new URL(image, site.url);
         document.documentElement.dataset.theme = next;
         localStorage.setItem('theme', next);
       });
+
+      (() => {
+        const now = Date.now();
+        const cards = [...document.querySelectorAll('[data-event-card][data-event-date]')];
+
+        for (const element of document.querySelectorAll('[data-event-date]')) {
+          const eventDate = Date.parse(element.dataset.eventDate ?? '');
+          if (Number.isNaN(eventDate)) continue;
+          const timing = eventDate >= now ? 'upcoming' : 'past';
+          const status = element.querySelector('[data-event-status]');
+          if (!status) continue;
+          status.textContent = timing === 'upcoming'
+            ? (element.matches('header') ? 'Upcoming talk' : 'Upcoming')
+            : 'Past talk';
+          status.classList.toggle('upcoming', timing === 'upcoming');
+          status.classList.toggle('past', timing === 'past');
+        }
+
+        const groups = document.querySelectorAll('[data-event-group]');
+        if (groups.length === 0) return;
+        const lists = Object.fromEntries([...groups].map((group) => [group.dataset.eventGroup, group.querySelector('.card-list')]));
+        cards
+          .sort((a, b) => Date.parse(b.dataset.eventDate ?? '') - Date.parse(a.dataset.eventDate ?? ''))
+          .forEach((card) => {
+            const timing = Date.parse(card.dataset.eventDate ?? '') >= now ? 'upcoming' : 'past';
+            lists[timing]?.append(card);
+          });
+        for (const group of groups) group.hidden = group.querySelectorAll('[data-event-card]').length === 0;
+      })();
     </script>
   </body>
 </html>

@@ -43,11 +43,11 @@ const personJsonLd = {
       <div class="portrait-wrap"><img class="portrait" src="/profile.jpg" width="879" height="879" alt="Portrait of Ayodeji Ogundare" /></div>
     </div>
   </section>
-  <section class="section shell">
+  <section class="section shell home-section">
     <div class="section-heading"><h2>Latest articles</h2><a href="/blog">View all →</a></div>
     <div class="card-list">{posts.map((post) => <ArticleCard post={post} horizontal />)}</div>
   </section>
-  <section class="section shell">
+  <section class="section shell home-section">
     <div class="section-heading"><h2>Upcoming and recent talks</h2><a href="/speaking">View all →</a></div>
     <div class="card-list">{events.map((event) => <EventCard event={event} timing={eventTiming(event.data.date, now)} />)}</div>
   </section>

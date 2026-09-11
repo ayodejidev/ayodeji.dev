@@ -32,8 +32,8 @@ const jsonLd = {
 };
 ---
 <BaseLayout title={event.data.title} description={event.data.description} image={event.data.cover?.src} type="article" publishedAt={event.data.date} tags={event.data.tags} jsonLd={jsonLd}>
-  <header class="article-header shell">
-    <p class="eyebrow">{timing === 'upcoming' ? 'Upcoming talk' : 'Past talk'} · {event.data.event}</p>
+  <header class="article-header shell" data-event-date={event.data.date.toISOString()}>
+    <p class="eyebrow"><span data-event-status>{timing === 'upcoming' ? 'Upcoming talk' : 'Past talk'}</span> · {event.data.event}</p>
     <h1>{event.data.title}</h1>
     <p class="lede">{event.data.description}</p>
     <div class="meta"><time datetime={event.data.date.toISOString()}>{formatDate(event.data.date)}</time> · {event.data.location}</div>
