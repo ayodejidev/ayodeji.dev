@@ -13,8 +13,13 @@ const aboutParagraphs = (about.body ?? '')
   .filter((block) => block && !block.startsWith('#') && !block.startsWith('-'))
   .slice(0, 2);
 const posts = (await getBlogPosts()).slice(0, 2);
-const events = (await getEvents()).slice(0, 2);
 const now = new Date();
+const allEvents = await getEvents();
+const upcomingEvents = allEvents
+  .filter((event) => eventTiming(event.data.date, now) === 'upcoming')
+  .sort((a, b) => a.data.date.getTime() - b.data.date.getTime() || a.id.localeCompare(b.id));
+const recentEvents = allEvents.filter((event) => eventTiming(event.data.date, now) === 'past');
+const events = [...upcomingEvents, ...recentEvents].slice(0, 2);
 const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',

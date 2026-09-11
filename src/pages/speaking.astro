@@ -9,7 +9,9 @@ const page = await getPage('speaking');
 const { Content } = await render(page);
 const events = await getEvents();
 const now = new Date();
-const upcoming = events.filter((event) => eventTiming(event.data.date, now) === 'upcoming');
+const upcoming = events
+  .filter((event) => eventTiming(event.data.date, now) === 'upcoming')
+  .sort((a, b) => a.data.date.getTime() - b.data.date.getTime() || a.id.localeCompare(b.id));
 const past = events.filter((event) => eventTiming(event.data.date, now) === 'past');
 ---
 <BaseLayout title={page.data.title} description={page.data.description}>
