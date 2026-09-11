@@ -99,7 +99,12 @@ const socialImage = new URL(image, site.url);
         if (groups.length === 0) return;
         const lists = Object.fromEntries([...groups].map((group) => [group.dataset.eventGroup, group.querySelector('.card-list')]));
         cards
-          .sort((a, b) => Date.parse(b.dataset.eventDate ?? '') - Date.parse(a.dataset.eventDate ?? ''))
+          .sort((a, b) => {
+            const aDate = Date.parse(a.dataset.eventDate ?? '');
+            const bDate = Date.parse(b.dataset.eventDate ?? '');
+            const bothUpcoming = aDate >= now && bDate >= now;
+            return bothUpcoming ? aDate - bDate : bDate - aDate;
+          })
           .forEach((card) => {
             const timing = Date.parse(card.dataset.eventDate ?? '') >= now ? 'upcoming' : 'past';
             lists[timing]?.append(card);

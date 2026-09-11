@@ -4,7 +4,7 @@
   --surface: #ffffff;
   --surface-soft: #eef2f6;
   --text: #001838;
-  --muted: #69738c;
+  --muted: #626d85;
   --line: #dde6ed;
   --brand: #1f5e8e;
   --brand-strong: #001838;
@@ -37,7 +37,7 @@ img { display: block; max-width: 100%; height: auto; }
 a { color: var(--brand); text-underline-offset: .22em; text-decoration-thickness: 1px; transition: color .15s ease; }
 a:hover { color: var(--brand-strong); }
 button, input, textarea { font: inherit; }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
 .shell { width: min(calc(100% - 2.5rem), var(--shell)); margin-inline: auto; }
 .narrow { max-width: var(--reading); }
 .skip-link { position: fixed; left: 1rem; top: -5rem; z-index: 100; padding: .6rem .85rem; background: var(--text); color: var(--bg); border-radius: 2px; }
