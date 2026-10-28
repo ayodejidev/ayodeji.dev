@@ -12,8 +12,9 @@ const { event, timing = eventTiming(event.data.date), showImage = true } = Astro
     <span class:list={['talk-status', timing]} data-event-status>{timing === 'upcoming' ? 'Upcoming' : 'Past talk'}</span>
     <div class="meta"><time datetime={event.data.date.toISOString()}>{formatDate(event.data.date)}</time> · {event.data.location}</div>
     <h2><a href={`/speaking/${slugFor(event)}`}>{event.data.title}</a></h2>
+    <p class="event-venue">{event.data.event}</p>
     <p>{event.data.description}</p>
     <div class="tag-row">{event.data.tags.map((tag) => <a href={`/topics/${tag}`}>#{topicLabel(tag)}</a>)}</div>
-    <div class="link-row"><a href={`/speaking/${slugFor(event)}`}>Talk details →</a>{event.data.videoUrl && <a href={event.data.videoUrl}>Watch talk ↗</a>}{event.data.eventUrl && <a href={event.data.eventUrl}>Event details ↗</a>}</div>
+    <div class="link-row"><a href={`/speaking/${slugFor(event)}`}>Talk details →</a>{event.data.slidesUrl && <a href={event.data.slidesUrl}>Slides ↗</a>}{event.data.videoUrl && <a href={event.data.videoUrl}>Watch talk ↗</a>}{event.data.eventUrl && <a href={event.data.eventUrl}>Event details ↗</a>}</div>
   </div>
 </article>

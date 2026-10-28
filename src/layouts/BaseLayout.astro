@@ -3,6 +3,9 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../data/site';
 import '../styles/global.css';
+import '../styles/design-tokens.css';
+import '../styles/field-notes.css';
+import '../styles/home.css';
 
 interface Props {
   title?: string;
@@ -31,14 +34,14 @@ const socialImage = new URL(image, site.url);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-design="field-notes">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#f3f6f9" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#001838" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f7f5f0" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1c1d1f" media="(prefers-color-scheme: dark)" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/icon.png" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-icon.png" />
@@ -59,7 +62,8 @@ const socialImage = new URL(image, site.url);
     <title>{pageTitle}</title>
     <script is:inline>
       (() => {
-        const saved = localStorage.getItem('theme');
+        let saved;
+        try { saved = localStorage.getItem('theme'); } catch {}
         const dark = saved === 'dark' || (!saved && matchMedia('(prefers-color-scheme: dark)').matches);
         document.documentElement.dataset.theme = dark ? 'dark' : 'light';
       })();
@@ -75,7 +79,7 @@ const socialImage = new URL(image, site.url);
       document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
         const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
         document.documentElement.dataset.theme = next;
-        localStorage.setItem('theme', next);
+        try { localStorage.setItem('theme', next); } catch {}
       });
 
       (() => {

@@ -4,6 +4,13 @@ Ayodeji Ogundare’s home on the web: writing, talks, open-source work, and proj
 
 The site is built with Astro and plain CSS. Its content lives in this repository as Markdown, so publishing does not depend on a CMS or client-side framework.
 
+## Design system
+
+The Developer Field Notes site theme is documented in
+[the design specification](docs/design-system.md), with a
+[light/dark visual specimen](docs/design-system.html) and reusable tokens in
+`src/styles/design-tokens.css`. All pages use these tokens through the shared layout.
+
 ## Local development
 
 Requires Node.js `24.19.x` and npm `>=10.8.2`.
