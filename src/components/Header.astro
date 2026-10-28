@@ -28,7 +28,7 @@ const current = Astro.url.pathname;
           </svg>
         </summary>
         <nav aria-label="Mobile">
-          {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+          {navigation.map((item) => <a href={item.href} aria-current={current === item.href || (item.href !== '/' && current.startsWith(item.href)) ? 'page' : undefined}>{item.label}</a>)}
         </nav>
       </details>
     </div>

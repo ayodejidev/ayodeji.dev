@@ -24,19 +24,31 @@
 
     let records = [];
     let loading;
+    let loadState = 'idle';
+    let opener;
     const labels = { article: 'Article', event: 'Talk', featured: 'Featured', project: 'Project' };
 
-    const load = () => loading ??= fetch('/content-index.json')
-      .then((response) => {
-        if (!response.ok) throw new Error('Search index unavailable');
-        return response.json();
-      })
-      .then((payload) => { records = payload.records ?? []; })
-      .catch(() => { status.textContent = 'Search is temporarily unavailable.'; });
+    const load = () => {
+      if (loading) return loading;
+      loadState = 'loading';
+      status.textContent = 'Loading public content…';
+      loading = fetch('/content-index.json')
+        .then((response) => {
+          if (!response.ok) throw new Error('Search index unavailable');
+          return response.json();
+        })
+        .then((payload) => { records = payload.records ?? []; loadState = 'ready'; })
+        .catch(() => { loadState = 'failed'; loading = undefined; });
+      return loading;
+    };
 
     const render = () => {
       const query = input.value.trim().toLowerCase();
       results.replaceChildren();
+      if (loadState !== 'ready') {
+        status.textContent = loadState === 'failed' ? 'Search is temporarily unavailable. Close and reopen search to try again.' : 'Loading public content…';
+        return;
+      }
       if (!query) {
         status.textContent = 'Start typing to search all public content.';
         return;
@@ -68,11 +80,16 @@
     };
 
     const open = async () => {
+      if (dialog.open) return;
+      opener = document.activeElement;
       dialog.showModal();
-      await load();
       input.focus();
-      render();
+      await load();
+      if (dialog.open) render();
     };
+    dialog.addEventListener('close', () => {
+      if (opener instanceof HTMLElement) opener.focus();
+    });
     document.querySelectorAll('[data-search-open]').forEach((button) => button.addEventListener('click', open));
     dialog.querySelector('[data-search-close]')?.addEventListener('click', () => dialog.close());
     dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
