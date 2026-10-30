@@ -19,6 +19,31 @@ const required = [
   'content-media/blog/rest-api-basics-a-beginners-introduction-to-api-development/image-01.png',
 ];
 for (const file of required) await access(new URL(file, dist));
+
+// Static Astro responses rely on the deployment host to attach HTTP headers.
+// Check the homepage rule and its built targets, not HTML <link> elements.
+const hosting = await readFile(new URL('netlify.toml', root), 'utf8');
+const homepageHeaders = hosting.split('[[headers]]').slice(1)
+  .find((block) => /^\s*for\s*=\s*"\/"\s*$/mu.test(block));
+assert(homepageHeaders, 'Missing homepage response header rule');
+const discoveryHeader = homepageHeaders.match(/^\s*Link\s*=\s*'([^'\r\n]+)'\s*$/mu)?.[1];
+assert(discoveryHeader, 'Missing homepage Link response header');
+const discoveryLinks = discoveryHeader.split(/,\s*/u);
+assert.equal(discoveryLinks.length, 2);
+const discoveryTypes = new Map([
+  ['/llms.txt', 'text/plain'],
+  ['/content-index.json', 'application/json'],
+]);
+for (const link of discoveryLinks) {
+  const parsed = link.match(/^<([^>]+)>; rel="describedby"; type="([^"]+)"$/u);
+  assert(parsed, `Invalid discovery Link value: ${link}`);
+  const [, target, mediaType] = parsed;
+  assert.equal(discoveryTypes.get(target), mediaType, `Unexpected discovery target: ${target}`);
+  discoveryTypes.delete(target);
+  await access(new URL(target.slice(1), dist));
+}
+assert.equal(discoveryTypes.size, 0, 'Missing discovery resource in homepage Link header');
+
 await assert.rejects(access(new URL('topics/index.html', dist)), { code: 'ENOENT' });
 await assert.rejects(access(new URL('projects/index.html', dist)), { code: 'ENOENT' });
 await assert.rejects(access(new URL('project/index.html', dist)), { code: 'ENOENT' });

@@ -33,6 +33,13 @@ Posts, talks, featured work, and projects keep their `index.md` and images toget
 
 ## Ship safely
 
+Netlify attaches homepage `Link` response headers advertising `/llms.txt` and
+`/content-index.json` with the registered `describedby` relation (RFC 8288).
+These reuse the public-content helpers; the content index retains schema version 2.
+`npm run build` verifies the header configuration and that both targets exist.
+Astro preview and a plain static HTTP server do not apply `netlify.toml` headers.
+After deployment, verify the actual response with `curl -I https://ayodeji.dev/`.
+
 ```sh
 npm run check
 npm test
