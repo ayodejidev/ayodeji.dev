@@ -46,3 +46,28 @@ npm test
 npm run content:audit
 npm run build
 ```
+
+## Markdown content negotiation
+
+On Netlify, the `markdown-negotiation` Edge Function serves a pre-rendered
+Markdown representation when a GET or HEAD request explicitly accepts
+`text/markdown` with positive quality at least as high as HTML. HTML remains the
+browser default. Both representations declare `Vary: Accept`; negotiated Markdown
+is not cached and preserves the original security and discovery headers.
+
+Markdown is built from the same public-content helpers as the site, with local
+entry media rewritten to its public media route. Homepage, blog, speaking,
+featured, article, talk, and topic representations live under `/markdown/` and
+are excluded from the sitemap. Existing `/raw/` source exports are unchanged.
+No tokenizer is installed, so no estimated `x-markdown-tokens` count is advertised.
+
+After Netlify deployment (or with Netlify Dev), verify:
+
+```sh
+curl -i -H 'Accept: text/markdown' https://ayodeji.dev/
+curl -I -H 'Accept: text/html' https://ayodeji.dev/
+```
+
+The first should return `Content-Type: text/markdown; charset=utf-8`; the second
+should return HTML. Astro preview and plain static servers serve the generated
+Markdown files directly but do not execute the Edge Function.

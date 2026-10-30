@@ -10,7 +10,7 @@ export default defineConfig({
     sitemap({
       filter: (page) => {
         const path = new URL(page).pathname;
-        return path !== '/404' && path !== '/about' && !path.startsWith('/blog/tags/') && !path.startsWith('/raw/') && !path.startsWith('/content-media/');
+        return path !== '/404' && path !== '/about' && !path.startsWith('/blog/tags/') && !path.startsWith('/markdown/') && !path.startsWith('/raw/') && !path.startsWith('/content-media/');
       },
     }),
   ],
