@@ -33,6 +33,10 @@ Posts, talks, featured work, and projects keep their `index.md` and images toget
 
 ## Ship safely
 
+`robots.txt` declares `Content-Signal: ai-train=no, search=yes, ai-input=no`
+for all user agents. This expresses usage preferences separately from the existing
+crawl allowance and sitemap declaration.
+
 Netlify attaches homepage `Link` response headers advertising `/llms.txt` and
 `/content-index.json` with the registered `describedby` relation (RFC 8288).
 These reuse the public-content helpers; the content index retains schema version 2.
