@@ -21,3 +21,11 @@ test('resource metadata rejects missing labels and unsafe URLs', () => {
   }
   assert.deepEqual(validateMetadata('events', { ...data, resources: [{ label: 'Workshop notes', url: 'https://example.com/notes' }] }), []);
 });
+
+test('audit requires literal HTTPS URLs, matching the collection schema', () => {
+  const data = { title: 'Talk', description: 'Description', draft: true, tags: [] };
+  for (const url of ['https:example.com', 'https:/example.com', 'http://example.com', 'HTTPS://example.com', ' https://example.com', 'https://', '//example.com']) {
+    assert(validateMetadata('events', { ...data, resources: [{ label: 'Slides', url }] }).includes('resources must contain a label and HTTPS URL'), url);
+  }
+  assert.deepEqual(validateMetadata('events', { ...data, resources: [{ label: 'Slides', url: 'https://example.com/slides?format=pdf' }] }), []);
+});

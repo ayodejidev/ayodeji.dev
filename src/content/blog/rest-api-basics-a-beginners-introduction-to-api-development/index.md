@@ -7,9 +7,13 @@ guide:
   level: beginner
   prerequisites:
     - "Basic Python: variables, functions, and data types"
-    - "Using a terminal and installing packages with pip"
+    - "Using the terminal or command prompt"
+    - "Installing Python packages with pip"
   outcomes:
-    - "Explain APIs, HTTP methods, REST, and JSON"
+    - "What APIs are and why they’re used"
+    - "How APIs communicate over the internet"
+    - "The basics of HTTP and REST"
+    - "How JSON is used for data exchange"
     - "Set up a FastAPI development environment"
   faq:
     - question: "Do I need a frontend to follow this guide?"
@@ -57,30 +61,6 @@ Throughout the series, you’ll build a backend API that powers the Footdev stor
 * Checking out orders
 
 You don’t need a frontend for now. We’ll focus purely on the API that a frontend or mobile app could connect to.
-
-## What You’ll Learn in This Part
-
-In this first part, you’ll get a foundation on what APIs are and how they work. You’ll learn:
-
-* What APIs are and why they’re used
-
-* How APIs communicate over the internet
-
-* The basics of HTTP and REST
-
-* How JSON is used for data exchange
-
-* How to setup your development environment for a FastAPI project
-
-### Prerequisites
-
-This tutorial is for beginners, but you should be comfortable with the basics of:
-
-* Python (variables, functions, basic data types)
-
-* Using the terminal or command prompt
-
-* Installing Python packages with pip
 
 ## **What is an API?**
 

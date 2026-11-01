@@ -1,6 +1,24 @@
 const topicPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/u;
 const sitePathPattern = /^\/(?!\/)[a-z0-9/_-]*(?:#[a-z0-9_-]+)?$/u;
 
+/** Match the content schema's nonempty, trimmed text fields. */
+function nonEmptyString(value) {
+  return typeof value === 'string' && value.trim().length > 0;
+}
+
+/** Catch malformed guide metadata before Astro's schema validation at build time. */
+function validateGuide(guide) {
+  const errors = [];
+  if (!guide || typeof guide !== 'object' || Array.isArray(guide)) return ['guide must be an object'];
+  if (guide.level !== undefined && !['beginner', 'intermediate', 'advanced'].includes(guide.level)) errors.push('guide.level must be beginner, intermediate, or advanced');
+  for (const field of ['prerequisites', 'outcomes']) {
+    if (guide[field] !== undefined && (!Array.isArray(guide[field]) || !guide[field].every(nonEmptyString))) errors.push(`guide.${field} must contain nonempty strings`);
+  }
+  if (guide.faq !== undefined && (!Array.isArray(guide.faq) || guide.faq.some((item) => !item || !nonEmptyString(item.question) || !nonEmptyString(item.answer)))) errors.push('guide.faq must contain nonempty questions and answers');
+  return errors;
+}
+
+/** Audit authored frontmatter, including optional guide and resource metadata. */
 export function validateMetadata(collection, data) {
   const errors = [];
   if (!data || typeof data !== 'object') return ['frontmatter must be an object'];
@@ -11,9 +29,11 @@ export function validateMetadata(collection, data) {
 
   if (collection === 'blog' && data.kind !== undefined && !['article', 'guide'].includes(data.kind)) errors.push('kind must be article or guide');
 
+  if (collection === 'blog' && data.guide !== undefined) errors.push(...validateGuide(data.guide));
+
   if (collection === 'events' && data.resources !== undefined) {
     const https = (value) => {
-      try { return new URL(value).protocol === 'https:'; } catch { return false; }
+      try { return value.startsWith('https://') && new URL(value).protocol === 'https:'; } catch { return false; }
     };
     if (!Array.isArray(data.resources) || data.resources.some((item) => !item || typeof item.label !== 'string' || !item.label.trim() || typeof item.url !== 'string' || !https(item.url))) errors.push('resources must contain a label and HTTPS URL');
   }
