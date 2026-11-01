@@ -21,7 +21,3 @@ Using Bento, a shared frontend library at Adyen, as a case study, the talk shows
 - How to structure internal projects for reuse using open source practices
 - How to design sustainable contribution and maintainership models
 - How to measure impact through onboarding time, review turnaround, visibility, and reuse
-
-## Session details
-
-The intermediate session takes place in The Pit on Thursday, September 10, 2026, from 14:20 to 14:45.

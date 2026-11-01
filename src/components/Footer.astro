@@ -1,19 +1,39 @@
 ---
 import { site } from '../data/site';
 ---
-
 <footer class="site-footer">
-  <div class="shell footer-inner">
-    <div>
-      <strong>{site.name}</strong>
-      <p>Developer advocacy, open source, engineering, and community.</p>
+  <div class="shell">
+    <section class="footer-subscribe" aria-labelledby="footer-subscribe-title">
+      <div>
+        <p class="footer-label">Keep in touch</p>
+        <h2 id="footer-subscribe-title">Notes from the work.</h2>
+        <p>Developer experience, open source, and building for humans and agents.</p>
+      </div>
+      <a class="button footer-subscribe-link" href={site.social.substack}>Subscribe on Substack <span aria-hidden="true">↗</span></a>
+    </section>
+    <div class="footer-directory">
+      <div class="footer-identity">
+        <a class="footer-wordmark" href="/" aria-label={`${site.shortName} home`}>ayodeji.dev<span aria-hidden="true">_</span></a>
+        <p>{site.name}</p>
+        <p>Developer advocacy, engineering,<br />and the communities around them.</p>
+      </div>
+      <nav class="footer-links" aria-labelledby="footer-explore-title">
+        <h2 id="footer-explore-title">Explore</h2>
+        <ul>
+          <li><a href="/blog">Writing</a></li>
+          <li><a href="/guides">Technical guides</a></li>
+          <li><a href="/speaking">Speaking</a></li>
+          <li><a href="/featured">Featured work</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-links" aria-labelledby="footer-connect-title">
+        <h2 id="footer-connect-title">Connect</h2>
+        <ul>
+          <li><a href="/connect">Connect with me</a></li>
+          <li><a href="/rss.xml">RSS feed</a></li>
+        </ul>
+      </nav>
     </div>
-    <nav aria-label="Social links">
-      <a href={site.social.github}>GitHub</a>
-      <a href={site.social.linkedin}>LinkedIn</a>
-      <a href={site.social.x}>X</a>
-      <a href="/rss.xml">RSS</a>
-    </nav>
+    <div class="footer-bottom"><p>© {new Date().getUTCFullYear()} {site.name}.</p><a href="#top">Back to top <span aria-hidden="true">↑</span></a></div>
   </div>
-  <div class="shell footer-bottom">© {new Date().getUTCFullYear()} {site.name}.</div>
 </footer>

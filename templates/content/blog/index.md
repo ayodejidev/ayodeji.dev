@@ -2,6 +2,7 @@
 title: "Replace with article title"
 description: "Replace with a concise article description."
 publishedAt: "2026-01-01T00:00:00Z"
+kind: article
 tags: []
 aliases: []
 related: []

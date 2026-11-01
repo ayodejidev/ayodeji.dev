@@ -1,0 +1,34 @@
+---
+interface Props { source: string; }
+const { source } = Astro.props;
+---
+<div class="writing-actions" data-markdown-copy>
+  <button class="button secondary" type="button" data-copy-markdown hidden>Copy as Markdown <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="8" width="12" height="13" rx="1" /><path d="M16 8V3H3v13h5" /></svg></button>
+  <details class="markdown-source">
+    <summary>View Markdown</summary>
+    <label for="writing-markdown">Article Markdown</label>
+    <textarea id="writing-markdown" readonly rows="10" spellcheck="false">{source}</textarea>
+  </details>
+  <p class="meta" role="status" data-markdown-status></p>
+</div>
+<script is:inline>
+  (() => {
+    const root = document.querySelector('[data-markdown-copy]');
+    if (!root) return;
+    const button = root.querySelector('[data-copy-markdown]');
+    const text = root.querySelector('textarea');
+    const status = root.querySelector('[data-markdown-status]');
+    if (!button || !text || !status) return;
+    button.hidden = false;
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(text.value);
+        status.textContent = 'Markdown copied.';
+      } catch {
+        root.querySelector('details').open = true;
+        text.focus(); text.select();
+        status.textContent = 'Select and copy the Markdown with Ctrl+C or Command+C.';
+      }
+    });
+  })();
+</script>

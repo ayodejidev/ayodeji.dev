@@ -1,0 +1,10 @@
+---
+import { youtubeEmbedUrl } from '../lib/youtube.mjs';
+interface Props { videoUrl?: string; title: string; }
+const { videoUrl, title } = Astro.props;
+const embedUrl = youtubeEmbedUrl(videoUrl);
+---
+{embedUrl && <section class="talk-recording shell" aria-labelledby="recording-title">
+  <div class="section-heading"><h2 id="recording-title">Watch the recording</h2><a href={videoUrl}>Watch on YouTube ↗</a></div>
+  <iframe class="talk-video" src={embedUrl} title={`Recording: ${title}`} width="1120" height="630" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+</section>}

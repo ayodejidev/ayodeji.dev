@@ -1,0 +1,24 @@
+.connect-intro { padding-bottom: var(--space-8); }
+.connect-intro p { margin-top: 0; }
+.connect-layout { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: var(--space-16); padding-bottom: var(--space-16); align-items: start; }
+.connect-layout h2 { font-size: var(--type-card); margin: 0 0 var(--space-6); line-height: 1.3; }
+.connect-options { border-top: 1px solid var(--line); }
+.connect-option { padding-block: var(--space-6); border-bottom: 1px solid var(--line); }
+.connect-option h3 { font-size: 1.25rem; margin: 0 0 var(--space-3); line-height: 1.3; }
+.connect-option > p:not(.connect-availability) { color: var(--muted); margin: 0 0 var(--space-6); max-width: 48ch; }
+.connect-option .button { min-height: var(--target); color: var(--text); gap: var(--space-3); font-size: var(--type-small); text-align: left; }
+.connect-availability { margin: 0; color: var(--muted); font: var(--type-label)/1.5 var(--mono); }
+.connect-socials { padding: var(--space-8); border: 1px solid var(--line); background: var(--surface-soft); }
+.connect-socials ul { padding: 0; margin: 0; list-style: none; }
+.connect-socials li { border-top: 1px solid var(--line); }
+.connect-socials a { display: grid; gap: var(--space-2); padding-block: var(--space-4); color: var(--text); text-decoration: none; }
+.connect-socials a:hover .connect-social-name { color: var(--brand); text-decoration: underline; text-underline-offset: .3em; }
+.connect-social-name { display: flex; justify-content: space-between; gap: var(--space-4); font-weight: 600; }
+.connect-social-description { color: var(--muted); font-size: var(--type-small); }
+@media (max-width: 899px) {
+  .connect-layout { gap: var(--space-8); }
+}
+@media (max-width: 679px) {
+  .connect-layout { grid-template-columns: minmax(0, 1fr); padding-bottom: 2.5rem; }
+  .connect-socials { padding: var(--space-6); }
+}

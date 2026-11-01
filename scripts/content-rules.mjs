@@ -7,6 +7,17 @@ export function validateMetadata(collection, data) {
   if (typeof data.title !== 'string' || !data.title.trim()) errors.push('title is required');
   if (typeof data.description !== 'string' || !data.description.trim()) errors.push('description is required');
 
+  if (data.featured !== undefined && typeof data.featured !== 'boolean') errors.push('featured must be a boolean');
+
+  if (collection === 'blog' && data.kind !== undefined && !['article', 'guide'].includes(data.kind)) errors.push('kind must be article or guide');
+
+  if (collection === 'events' && data.resources !== undefined) {
+    const https = (value) => {
+      try { return new URL(value).protocol === 'https:'; } catch { return false; }
+    };
+    if (!Array.isArray(data.resources) || data.resources.some((item) => !item || typeof item.label !== 'string' || !item.label.trim() || typeof item.url !== 'string' || !https(item.url))) errors.push('resources must contain a label and HTTPS URL');
+  }
+
   if (collection !== 'pages') {
     if (typeof data.draft !== 'boolean') errors.push('draft must be explicit');
     if (!Array.isArray(data.tags)) errors.push('tags must be an array');

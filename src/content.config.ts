@@ -21,6 +21,13 @@ const blog = defineCollection({
     publishedAt: z.coerce.date(),
     updatedAt: z.coerce.date().optional(),
     author: z.string().trim().min(1).default('Ayodeji Ogundare'),
+    kind: z.enum(['article', 'guide']).default('article'),
+    guide: z.object({
+      level: z.enum(['beginner', 'intermediate', 'advanced']).optional(),
+      prerequisites: z.array(z.string().trim().min(1)).default([]),
+      outcomes: z.array(z.string().trim().min(1)).default([]),
+      faq: z.array(z.object({ question: z.string().trim().min(1), answer: z.string().trim().min(1) })).default([]),
+    }).optional(),
     tags,
     aliases,
     related,
@@ -49,9 +56,11 @@ const events = defineCollection({
     related,
     cover: image().optional(),
     coverAlt: z.string().trim().min(1).optional(),
+    resources: z.array(z.object({ label: z.string().trim().min(1), url: httpsUrl })).default([]),
     slidesUrl: httpsUrl.optional(),
     videoUrl: httpsUrl.optional(),
     eventUrl: httpsUrl.optional(),
+    featured: z.boolean().default(false),
     draft: z.boolean().default(true),
   }).superRefine((data, context) => {
     if (data.cover && !data.coverAlt) context.addIssue({ code: 'custom', path: ['coverAlt'], message: 'Cover images require useful alternative text' });
@@ -71,6 +80,7 @@ const featured = defineCollection({
     imageAlt: z.string().trim().min(1).optional(),
     tags,
     related,
+    featured: z.boolean().default(false),
     draft: z.boolean().default(true),
   }).superRefine((data, context) => {
     if (data.image && !data.imageAlt) context.addIssue({ code: 'custom', path: ['imageAlt'], message: 'Images require useful alternative text' });
@@ -83,6 +93,8 @@ const pages = defineCollection({
     title: z.string().trim().min(1),
     description: z.string().trim().min(1),
     eyebrow: z.string().trim().min(1).optional(),
+    coffeeChatUrl: httpsUrl.optional(),
+    featured: z.boolean().default(false),
     draft: z.boolean().default(false),
   }),
 });

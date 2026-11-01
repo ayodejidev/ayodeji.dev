@@ -1,0 +1,10 @@
+---
+import { getTalkResources } from '../lib/talk-resources.mjs';
+interface Props {
+  data: { slidesUrl?: string; videoUrl?: string; resources?: { label: string; url: string }[] };
+  buttons?: boolean;
+}
+const { data, buttons = false } = Astro.props;
+const resources = getTalkResources({ slidesUrl: data.slidesUrl, videoUrl: data.videoUrl, resources: data.resources });
+---
+{resources.map((resource) => <a class={buttons ? 'button secondary' : undefined} href={resource.url}>{resource.label} ↗</a>)}

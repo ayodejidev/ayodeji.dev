@@ -8,6 +8,7 @@ publisher: "DeveloperRelations.com"
 tags: ["devrel", "interview", "community-building"]
 image: "./cover.jpeg"
 imageAlt: "Developer Relations origin story interview"
+featured: false
 draft: false
 ---
 

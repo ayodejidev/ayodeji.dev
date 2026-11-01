@@ -1,12 +1,12 @@
 ---
 import { render } from 'astro:content';
-import FeaturedCard from '../components/FeaturedCard.astro';
+import FeaturedContentCard from '../components/FeaturedContentCard.astro';
 import PageHeader from '../components/PageHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getFeatured, getPage } from '../lib/content';
-const page = await getPage('featured'); const { Content } = await render(page); const items = await getFeatured();
+import { getFeaturedContent, getPage } from '../lib/content';
+const page = await getPage('featured'); const { Content } = await render(page); const items = await getFeaturedContent();
 ---
 <BaseLayout title={page.data.title} description={page.data.description}>
   <PageHeader {...page.data} /><div class="shell content-page"><Content /></div>
-  <section class="section shell"><div class="card-grid">{items.map((item) => <FeaturedCard item={item} />)}</div></section>
+  <section class="section shell">{items.length > 0 ? <div class="featured-content-list">{items.map((item) => <FeaturedContentCard item={item} />)}</div> : <p class="empty-state">No featured content right now. Explore <a href="/blog">all writing</a> or <a href="/speaking">talks</a>.</p>}</section>
 </BaseLayout>

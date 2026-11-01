@@ -1,0 +1,38 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ArticleCard from './ArticleCard.astro';
+interface Props { posts: CollectionEntry<'blog'>[]; selected?: 'all' | 'article' | 'guide'; }
+const { posts, selected = 'all' } = Astro.props;
+const visible = posts.filter((post) => selected === 'all' || post.data.kind === selected);
+const categories = [
+  { id: 'all', label: 'All writing', href: '/blog', count: posts.length },
+  { id: 'article', label: 'Articles', href: '/blog/articles', count: posts.filter((post) => post.data.kind === 'article').length },
+  { id: 'guide', label: 'Guides', href: '/guides', count: posts.filter((post) => post.data.kind === 'guide').length },
+];
+---
+<section class="section shell" data-writing-list>
+  <nav class="writing-categories" aria-label="Writing categories">{categories.map((category) => <a href={category.href} aria-current={category.id === selected ? 'page' : undefined}>{category.label} <span class="meta">{category.count}</span></a>)}</nav>
+  <label for="writing-filter" class="eyebrow">Search this collection</label>
+  <input id="writing-filter" class="filter" type="search" placeholder="Search titles, descriptions, and topics" autocomplete="off" />
+  <p class="meta" data-writing-count aria-live="polite">{visible.length} {visible.length === 1 ? 'entry' : 'entries'}</p>
+  <div class="card-list">{visible.map((post) => <ArticleCard post={post} horizontal />)}</div>
+  <p class="empty-state" data-empty hidden={visible.length !== 0}>No writing matches this selection.</p>
+</section>
+<script is:inline>
+  (() => {
+    const list = document.querySelector('[data-writing-list]');
+    const input = list?.querySelector('#writing-filter');
+    if (!input) return;
+    const cards = [...list.querySelectorAll('[data-search]')];
+    input.addEventListener('input', () => {
+      const terms = input.value.trim().toLowerCase().split(/\s+/u).filter(Boolean);
+      let count = 0;
+      for (const card of cards) {
+        card.hidden = !terms.every((term) => card.dataset.search.includes(term));
+        if (!card.hidden) count++;
+      }
+      list.querySelector('[data-empty]').hidden = count !== 0;
+      list.querySelector('[data-writing-count]').textContent = `${count} ${count === 1 ? 'entry' : 'entries'}`;
+    });
+  })();
+</script>

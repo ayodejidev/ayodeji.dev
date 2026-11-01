@@ -13,7 +13,7 @@ const current = Astro.url.pathname;
     </a>
     <nav class="desktop-nav" aria-label="Primary">
       {navigation.map((item) => (
-        <a href={item.href} aria-current={current === item.href || (item.href !== '/' && current.startsWith(item.href)) ? 'page' : undefined}>{item.label}</a>
+        <a href={item.href} aria-current={current === item.href || current.startsWith(`${item.href}/`) || (item.href === '/blog' && current === '/guides') ? 'page' : undefined}>{item.label}</a>
       ))}
     </nav>
     <div class="header-actions">
@@ -28,7 +28,7 @@ const current = Astro.url.pathname;
           </svg>
         </summary>
         <nav aria-label="Mobile">
-          {navigation.map((item) => <a href={item.href} aria-current={current === item.href || (item.href !== '/' && current.startsWith(item.href)) ? 'page' : undefined}>{item.label}</a>)}
+          {navigation.map((item) => <a href={item.href} aria-current={current === item.href || current.startsWith(`${item.href}/`) || (item.href === '/blog' && current === '/guides') ? 'page' : undefined}>{item.label}</a>)}
         </nav>
       </details>
     </div>

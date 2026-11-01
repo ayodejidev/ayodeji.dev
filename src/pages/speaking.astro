@@ -15,7 +15,11 @@ const upcoming = events
 const past = events.filter((event) => eventTiming(event.data.date, now) === 'past');
 ---
 <BaseLayout title={page.data.title} description={page.data.description}>
-  <PageHeader {...page.data} /><div class="shell content-page"><Content /></div>
+  <PageHeader {...page.data} />
+  <div class="shell content-page">
+    <Content />
+    <div class="link-row"><a class="button" href="/connect">Invite me to speak →</a></div>
+  </div>
   <div class="speaking-groups shell">
     <section class="section" aria-labelledby="upcoming-talks" data-event-group="upcoming" hidden={upcoming.length === 0}><div class="section-heading"><h2 id="upcoming-talks">Upcoming talks</h2></div><div class="card-list">{upcoming.map((event) => <EventCard event={event} timing="upcoming" showImage={false} />)}</div></section>
     <section class="section" aria-labelledby="past-talks" data-event-group="past" hidden={past.length === 0}><div class="section-heading"><h2 id="past-talks">Past talks</h2></div><div class="card-list">{past.map((event) => <EventCard event={event} timing="past" showImage={false} />)}</div></section>

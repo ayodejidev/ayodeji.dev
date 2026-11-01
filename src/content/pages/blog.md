@@ -1,5 +1,5 @@
 ---
-title: "Blog"
+title: "Writing"
 description: "Notes and field reports on APIs, developer relations, open source, and developer experience."
 eyebrow: "Writing"
 ---

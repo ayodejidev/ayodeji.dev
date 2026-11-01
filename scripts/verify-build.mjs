@@ -6,7 +6,7 @@ const root = new URL('../', import.meta.url);
 const dist = new URL('dist/', root);
 const required = [
   'index.html', 'about/index.html', 'blog/index.html', 'speaking/index.html', 'featured/index.html',
-  '404.html', 'rss.xml',
+  '404.html', 'rss.xml', 'connect/index.html', 'markdown/connect.md', 'raw/pages/connect.md',
   'feed.json', 'content-index.json', 'llms.txt', 'robots.txt', 'sitemap-index.xml',
   'blog/devrelcon-new-york-2026-building-for-humans-agents-and-the-next-billion-builders/index.html',
   'blog/my-devrelcon-new-york-2025-experience/index.html',

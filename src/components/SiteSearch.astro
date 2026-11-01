@@ -69,7 +69,7 @@
         link.href = record.url;
         const meta = document.createElement('span');
         meta.className = 'meta';
-        meta.textContent = labels[record.type] ?? record.type;
+        meta.textContent = record.writingKind === 'guide' ? 'Guide' : (labels[record.type] ?? record.type);
         const title = document.createElement('strong');
         title.textContent = record.title;
         const description = document.createElement('span');

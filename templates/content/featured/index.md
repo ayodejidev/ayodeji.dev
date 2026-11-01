@@ -7,6 +7,7 @@ url: "https://example.com/item"
 publisher: "Publisher"
 tags: []
 related: []
+featured: false
 draft: true
 ---
 
