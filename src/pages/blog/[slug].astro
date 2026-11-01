@@ -2,6 +2,10 @@
 import { Image } from 'astro:assets';
 import { render } from 'astro:content';
 import ArticleEnhancements from '../../components/ArticleEnhancements.astro';
+import CopyMarkdown from '../../components/CopyMarkdown.astro';
+import { writingMarkdown } from '../../lib/writing-markdown.mjs';
+import GuideTools from '../../components/GuideTools.astro';
+import GuideFAQ from '../../components/GuideFAQ.astro';
 import RelatedContent from '../../components/RelatedContent.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getBlogPosts, getRelatedRecords, slugFor, topicLabel } from '../../lib/content';
@@ -13,7 +17,19 @@ export async function getStaticPaths() {
 }
 const { post } = Astro.props;
 const { Content, headings } = await render(post);
+const guideHeadings = post.data.kind === 'guide' ? [
+  ...(post.data.guide?.outcomes.length ? [{ depth: 2, slug: 'guide-outcomes', text: 'What you’ll learn' }] : []),
+  ...(post.data.guide?.prerequisites.length ? [{ depth: 2, slug: 'guide-prerequisites', text: 'Before you start' }] : []),
+  ...headings,
+  ...(post.data.guide?.faq.length ? [{ depth: 2, slug: 'guide-faq', text: 'Frequently asked questions' }] : []),
+] : headings;
 const url = canonical(`/blog/${slugFor(post)}`);
+const markdown = writingMarkdown({
+  title: post.data.title, description: post.data.description, author: post.data.author,
+  publishedAt: post.data.publishedAt.toISOString(), url, body: post.body ?? '',
+  mediaBase: `${site.url}/content-media/blog/${slugFor(post)}/`,
+  guide: post.data.kind === 'guide' ? post.data.guide : undefined,
+});
 const related = await getRelatedRecords(`/blog/${slugFor(post)}`, post.data.tags);
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -28,17 +44,23 @@ const jsonLd = {
 };
 ---
 <BaseLayout title={post.data.title} description={post.data.description} image={post.data.cover?.src} type="article" publishedAt={post.data.publishedAt} updatedAt={post.data.updatedAt} tags={post.data.tags} jsonLd={jsonLd}>
-  <header class="article-header shell">
-    <p class="eyebrow">Article</p>
+  <header class="article-header writing-header shell">
+    <p class="eyebrow"><a href={post.data.kind === 'guide' ? '/guides' : '/blog/articles'}>{post.data.kind === 'guide' ? 'Technical guide' : 'Article'}</a>{post.data.guide?.level && post.data.kind === 'guide' && ` · ${post.data.guide.level}`}</p>
     <h1>{post.data.title}</h1>
     <p class="lede">{post.data.description}</p>
-    <div class="meta"><time datetime={post.data.publishedAt.toISOString()}>{formatDate(post.data.publishedAt)}</time>{post.data.readingMinutes && <span> · {post.data.readingMinutes} min read</span>}</div>
+    <dl class="writing-metadata">
+      <div><dt>Author</dt><dd>{post.data.author}</dd></div>
+      <div><dt>Category</dt><dd>{post.data.kind === 'guide' ? 'Guide' : 'Article'}</dd></div>
+      <div><dt>Published</dt><dd><time datetime={post.data.publishedAt.toISOString()}>{formatDate(post.data.publishedAt)}</time></dd></div>
+      {post.data.readingMinutes && <div><dt>Reading time</dt><dd>{post.data.readingMinutes} min</dd></div>}
+    </dl>
     <div class="tag-row">{post.data.tags.map((tag) => <a href={`/topics/${tag}`}>#{topicLabel(tag)}</a>)}</div>
+    <CopyMarkdown source={markdown} />
   </header>
   {post.data.cover && <figure class="article-cover"><Image src={post.data.cover} alt={post.data.coverAlt ?? ''} widths={[768, 1120, 1600]} sizes="(max-width: 1120px) 100vw, 1120px" /></figure>}
   <div class="article-grid shell">
-    <ArticleEnhancements headings={headings} />
-    <article class="prose" data-longform><Content />{post.data.originalUrl && <p class="article-source">Originally published at <a href={post.data.originalUrl}>{new URL(post.data.originalUrl).hostname}</a>.</p>}</article>
+    <ArticleEnhancements readingProgress headings={guideHeadings} />
+    <article class:list={['prose', { 'guide-prose': post.data.kind === 'guide' }]} data-longform>{post.data.kind === 'guide' && <GuideTools post={post} />}<Content />{post.data.kind === 'guide' && <GuideFAQ items={post.data.guide?.faq ?? []} />}</article>
   </div>
   <RelatedContent records={related} />
 </BaseLayout>

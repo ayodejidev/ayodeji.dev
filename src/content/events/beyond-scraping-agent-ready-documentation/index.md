@@ -22,7 +22,3 @@ This session shares what server-log analysis of more than 10 million requests to
 - How raw `.md` URLs reduce parsing and reconstruction overhead
 - How a complete Markdown mirror can provide portable documentation context
 - How agent-ready delivery can reduce rate-limit pressure and improve generated integration code
-
-## Session details
-
-This intermediate Agentic Engineering breakout takes place in room 210 CG on Friday, October 23, 2026, from 5:10 PM to 5:35 PM PDT.

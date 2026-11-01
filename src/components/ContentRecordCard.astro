@@ -8,7 +8,7 @@ const labels = { article: 'Article', event: 'Talk', featured: 'Featured', projec
 ---
 <article class="card record-card">
   <div class="card-body">
-    <div class="meta"><span>{labels[record.type]}</span>{record.date && <span> · <time datetime={record.date}>{formatDate(new Date(record.date))}</time></span>}</div>
+    <div class="meta"><span>{record.writingKind === 'guide' ? 'Guide' : labels[record.type]}</span>{record.date && <span> · <time datetime={record.date}>{formatDate(new Date(record.date))}</time></span>}</div>
     <h2><a href={record.url}>{record.title}{record.type === 'featured' ? ' ↗' : ''}</a></h2>
     <p>{record.description}</p>
     <div class="tag-row">{record.tags.slice(0, 5).map((tag) => <a href={`/topics/${tag}`}>#{topicLabel(tag)}</a>)}</div>

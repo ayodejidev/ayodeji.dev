@@ -1,4 +1,5 @@
 ---
+import TalkResourceLinks from './TalkResourceLinks.astro';
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import { formatDate } from '../lib/format';
@@ -15,6 +16,6 @@ const { event, timing = eventTiming(event.data.date), showImage = true } = Astro
     <p class="event-venue">{event.data.event}</p>
     <p>{event.data.description}</p>
     <div class="tag-row">{event.data.tags.map((tag) => <a href={`/topics/${tag}`}>#{topicLabel(tag)}</a>)}</div>
-    <div class="link-row"><a href={`/speaking/${slugFor(event)}`}>Talk details →</a>{event.data.slidesUrl && <a href={event.data.slidesUrl}>Slides ↗</a>}{event.data.videoUrl && <a href={event.data.videoUrl}>Watch talk ↗</a>}{event.data.eventUrl && <a href={event.data.eventUrl}>Event details ↗</a>}</div>
+    <div class="link-row"><a href={`/speaking/${slugFor(event)}`}>Talk details →</a><TalkResourceLinks data={event.data} />{event.data.eventUrl && <a href={event.data.eventUrl}>Event details ↗</a>}</div>
   </div>
 </article>

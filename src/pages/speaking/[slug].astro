@@ -1,4 +1,7 @@
 ---
+import TalkRecording from '../../components/TalkRecording.astro';
+import TalkResourceLinks from '../../components/TalkResourceLinks.astro';
+import { getTalkResources } from '../../lib/talk-resources.mjs';
 import { Image } from 'astro:assets';
 import { render } from 'astro:content';
 import ArticleEnhancements from '../../components/ArticleEnhancements.astro';
@@ -17,6 +20,8 @@ const { Content, headings } = await render(event);
 const path = `/speaking/${slugFor(event)}`;
 const url = canonical(path);
 const related = await getRelatedRecords(path, event.data.tags);
+const resources = getTalkResources({ slidesUrl: event.data.slidesUrl, videoUrl: event.data.videoUrl, resources: event.data.resources });
+const contents = [...headings, ...(resources.length > 0 ? [{ depth: 2, slug: 'talk-resources-title', text: 'Talk resources' }] : [])];
 const timing = eventTiming(event.data.date);
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -38,9 +43,10 @@ const jsonLd = {
     <p class="lede">{event.data.description}</p>
     <div class="meta"><time datetime={event.data.date.toISOString()}>{formatDate(event.data.date)}</time> · {event.data.location}</div>
     <div class="tag-row">{event.data.tags.map((tag) => <a href={`/topics/${tag}`}>#{topicLabel(tag)}</a>)}</div>
-    <div class="link-row">{event.data.slidesUrl && <a class="button secondary" href={event.data.slidesUrl}>View slides ↗</a>}{event.data.videoUrl && <a class="button secondary" href={event.data.videoUrl}>Watch recording ↗</a>}{event.data.eventUrl && <a class="button secondary" href={event.data.eventUrl}>Event page ↗</a>}</div>
+    {event.data.eventUrl && <div class="link-row"><a href={event.data.eventUrl}>Event page ↗</a></div>}
   </header>
   {event.data.cover && <figure class="article-cover"><Image src={event.data.cover} alt={event.data.coverAlt ?? ''} widths={[768, 1120, 1600]} sizes="(max-width: 1120px) 100vw, 1120px" /></figure>}
-  <div class="article-grid shell"><ArticleEnhancements headings={headings} /><article class="prose" data-longform><Content /></article></div>
+  <TalkRecording videoUrl={event.data.videoUrl} title={event.data.title} />
+  <div class="article-grid shell"><ArticleEnhancements headings={contents} /><article class="prose" data-longform><Content />{resources.length > 0 && <section class="talk-resources" aria-labelledby="talk-resources-title"><h2 id="talk-resources-title">Talk resources</h2><div class="link-row"><TalkResourceLinks data={event.data} buttons /></div></section>}</article></div>
   <RelatedContent records={related} />
 </BaseLayout>

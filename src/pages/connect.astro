@@ -1,0 +1,35 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { getPage } from '../lib/content';
+import { site } from '../data/site';
+import '../styles/connect.css';
+const page = await getPage('connect');
+const { Content } = await render(page);
+const socials = [
+  { name: 'LinkedIn', description: 'Work, conversations, and community.', url: site.social.linkedin },
+  { name: 'GitHub', description: 'Code and open-source projects.', url: site.social.github },
+  { name: 'X', description: 'Short notes and ongoing conversations.', url: site.social.x },
+  { name: 'Substack', description: 'Writing and updates from the work.', url: site.social.substack },
+];
+---
+<BaseLayout title="Connect" description={page.data.description}>
+  <PageHeader {...page.data} />
+  <div class="shell content-page connect-intro"><Content /></div>
+  <div class="connect-layout shell">
+    <section class="connect-conversations" aria-labelledby="connect-conversations-title">
+      <p class="eyebrow">01 / Make time</p>
+      <h2 id="connect-conversations-title">Book a coffee chat.</h2>
+      <div class="connect-options"><div class="connect-option">
+        <p>A relaxed conversation about developer experience, open source, communities, or what you’re working on.</p>
+        {page.data.coffeeChatUrl ? <a class="button secondary" href={page.data.coffeeChatUrl}>Book a coffee chat <span aria-hidden="true">↗</span></a> : <p class="connect-availability">Booking link coming soon</p>}
+      </div></div>
+    </section>
+    <section class="connect-socials" aria-labelledby="connect-socials-title">
+      <p class="eyebrow">02 / Find me online</p>
+      <h2 id="connect-socials-title">Elsewhere on the web.</h2>
+      <ul>{socials.map((social) => <li><a href={social.url}><span class="connect-social-name">{social.name} <span aria-hidden="true">↗</span></span><span class="connect-social-description">{social.description}</span></a></li>)}</ul>
+    </section>
+  </div>
+</BaseLayout>

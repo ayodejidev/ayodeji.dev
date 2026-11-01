@@ -1,6 +1,7 @@
+import { selectFeatured } from './featured-selection.mjs';
 import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
 
-type PublicCollection = 'blog' | 'events' | 'featured' | 'projects';
+type PublicCollection = 'blog' | 'events' | 'featured' | 'projects' | 'pages';
 
 export interface ContentRecord {
   type: 'article' | 'event' | 'featured' | 'project';
@@ -12,6 +13,8 @@ export interface ContentRecord {
   tags: string[];
   related: string[];
   date?: string;
+  featured?: boolean;
+  writingKind?: 'article' | 'guide';
 }
 
 export async function getPage(id: string) {
@@ -24,6 +27,7 @@ export async function getPublicEntries(collection: 'blog'): Promise<CollectionEn
 export async function getPublicEntries(collection: 'events'): Promise<CollectionEntry<'events'>[]>;
 export async function getPublicEntries(collection: 'featured'): Promise<CollectionEntry<'featured'>[]>;
 export async function getPublicEntries(collection: 'projects'): Promise<CollectionEntry<'projects'>[]>;
+export async function getPublicEntries(collection: 'pages'): Promise<CollectionEntry<'pages'>[]>;
 export async function getPublicEntries(collection: PublicCollection) {
   switch (collection) {
     case 'blog': {
@@ -33,6 +37,7 @@ export async function getPublicEntries(collection: PublicCollection) {
     case 'events': return getCollection('events', ({ data }) => !data.draft);
     case 'featured': return getCollection('featured', ({ data }) => !data.draft);
     case 'projects': return getCollection('projects', ({ data }) => !data.draft);
+    case 'pages': return getCollection('pages', ({ data }) => !data.draft);
   }
 }
 
@@ -83,10 +88,10 @@ function excerpt(body: string | undefined) {
 export async function getContentRecords(): Promise<ContentRecord[]> {
   const [blog, events, featured, projects] = await Promise.all([getBlogPosts(), getEvents(), getFeatured(), getProjects()]);
   return [
-    ...blog.map((entry): ContentRecord => ({ type: 'article', id: slugFor(entry), title: entry.data.title, description: entry.data.description, excerpt: excerpt(entry.body), url: `/blog/${slugFor(entry)}`, tags: entry.data.tags, related: entry.data.related, date: entry.data.publishedAt.toISOString() })),
-    ...events.map((entry): ContentRecord => ({ type: 'event', id: slugFor(entry), title: entry.data.title, description: entry.data.description, excerpt: excerpt(entry.body), url: `/speaking/${slugFor(entry)}`, tags: entry.data.tags, related: entry.data.related, date: entry.data.date.toISOString() })),
-    ...featured.map((entry): ContentRecord => ({ type: 'featured', id: slugFor(entry), title: entry.data.title, description: entry.data.description, excerpt: excerpt(entry.body), url: entry.data.url, tags: entry.data.tags, related: entry.data.related, date: entry.data.date.toISOString() })),
-    ...projects.map((entry): ContentRecord => ({ type: 'project', id: slugFor(entry), title: entry.data.title, description: entry.data.description, excerpt: excerpt(entry.body), url: entry.data.link, tags: entry.data.tags, related: entry.data.related })),
+    ...blog.map((entry): ContentRecord => ({ type: 'article', writingKind: entry.data.kind, id: slugFor(entry), title: entry.data.title, description: entry.data.description, featured: entry.data.featured, excerpt: excerpt(entry.body), url: `/blog/${slugFor(entry)}`, tags: entry.data.tags, related: entry.data.related, date: entry.data.publishedAt.toISOString() })),
+    ...events.map((entry): ContentRecord => ({ type: 'event', id: slugFor(entry), title: entry.data.title, description: entry.data.description, featured: entry.data.featured, excerpt: excerpt(entry.body), url: `/speaking/${slugFor(entry)}`, tags: entry.data.tags, related: entry.data.related, date: entry.data.date.toISOString() })),
+    ...featured.map((entry): ContentRecord => ({ type: 'featured', id: slugFor(entry), title: entry.data.title, description: entry.data.description, featured: entry.data.featured, excerpt: excerpt(entry.body), url: entry.data.url, tags: entry.data.tags, related: entry.data.related, date: entry.data.date.toISOString() })),
+    ...projects.map((entry): ContentRecord => ({ type: 'project', id: slugFor(entry), title: entry.data.title, description: entry.data.description, featured: entry.data.featured, excerpt: excerpt(entry.body), url: entry.data.link, tags: entry.data.tags, related: entry.data.related })),
   ].sort((a, b) => (b.date ?? '').localeCompare(a.date ?? '') || a.type.localeCompare(b.type) || a.id.localeCompare(b.id));
 }
 
@@ -113,4 +118,32 @@ export async function getAliases() {
     ...blog.flatMap((entry) => entry.data.aliases.map((alias) => ({ alias, target: `/blog/${slugFor(entry)}` }))),
     ...events.flatMap((entry) => entry.data.aliases.map((alias) => ({ alias, target: `/speaking/${slugFor(entry)}` }))),
   ].sort((a, b) => a.alias.localeCompare(b.alias));
+}
+
+export interface FeaturedContent extends Omit<ContentRecord, 'type'> {
+  type: ContentRecord['type'] | 'page';
+  image?: import('astro').ImageMetadata;
+  imageAlt?: string;
+}
+
+/** Feature public content across collections, without changing its canonical URL. */
+export async function getFeaturedContent(): Promise<FeaturedContent[]> {
+  const [records, blog, events, appearances, pages] = await Promise.all([
+    getContentRecords(), getBlogPosts(), getEvents(), getFeatured(), getPublicEntries('pages'),
+  ]);
+  const media = new Map<string, Pick<FeaturedContent, 'image' | 'imageAlt'>>([
+    ...blog.map((entry) => [`article/${entry.id}`, { image: entry.data.cover, imageAlt: entry.data.coverAlt }] as const),
+    ...events.map((entry) => [`event/${entry.id}`, { image: entry.data.cover, imageAlt: entry.data.coverAlt }] as const),
+    ...appearances.map((entry) => [`featured/${entry.id}`, { image: entry.data.image, imageAlt: entry.data.imageAlt }] as const),
+  ]);
+  const pageRoutes: Record<string, string> = { home: '/', about: '/#about', blog: '/blog', speaking: '/speaking', featured: '/featured', connect: '/connect' };
+  const candidates: FeaturedContent[] = [
+    ...records.map((record) => ({ ...record, ...media.get(`${record.type}/${record.id}`) })),
+    ...pages.filter((entry) => entry.data.featured).map((entry): FeaturedContent => {
+      const url = pageRoutes[entry.id];
+      if (!url) throw new Error(`Featured page "${entry.id}" needs a public route before it can be featured.`);
+      return { type: 'page', id: entry.id, title: entry.data.title, description: entry.data.description, excerpt: excerpt(entry.body), url, tags: [], related: [], featured: true };
+    }),
+  ];
+  return selectFeatured(candidates);
 }

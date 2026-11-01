@@ -1,0 +1,19 @@
+---
+import { Image } from 'astro:assets';
+import { formatDate } from '../lib/format';
+import { topicLabel, type FeaturedContent } from '../lib/content';
+interface Props { item: FeaturedContent; }
+const { item } = Astro.props;
+const label = item.writingKind === 'guide' ? 'Guide' : ({ article: 'Article', event: 'Talk', project: 'Project', featured: 'Appearance', page: 'Page' } as const)[item.type];
+const external = item.url.startsWith('https://');
+---
+<article class:list={['home-feature', 'featured-content-card', { 'home-feature-text': !item.image }]}>
+  {item.image && <a class="home-feature-media" href={item.url} tabindex="-1" aria-hidden="true"><Image src={item.image} alt={item.imageAlt ?? ''} widths={[480, 800, 1200]} sizes="(max-width: 679px) 100vw, 50vw" loading="lazy" /></a>}
+  <div class="home-feature-copy">
+    <p class="meta">{label}{item.date && <> · <time datetime={item.date}>{formatDate(new Date(item.date))}</time></>}</p>
+    <h3><a href={item.url}>{item.title}{external && ' ↗'}</a></h3>
+    <p>{item.description}</p>
+    {item.tags.length > 0 && <div class="home-topics">{item.tags.slice(0, 3).map((tag) => <a href={`/topics/${tag}`}>{topicLabel(tag)}</a>)}</div>}
+    <a class="home-text-link" href={item.url}>{item.type === 'article' ? `Read ${label.toLowerCase()}` : item.type === 'event' ? 'Talk details' : item.type === 'project' ? 'Explore project' : 'View'} {external ? '↗' : '→'}</a>
+  </div>
+</article>

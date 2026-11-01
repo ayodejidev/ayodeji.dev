@@ -6,7 +6,7 @@ aliases: []
 draft: false
 link: "https://github.com/ayodejidev/github-data-app"
 github: "https://github.com/ayodejidev/github-data-app"
-featured: true
+featured: false
 ---
 
 GitHub Data turns repository and user activity into a compact visual overview for developers and teams.

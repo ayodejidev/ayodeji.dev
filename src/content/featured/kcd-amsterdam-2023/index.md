@@ -8,6 +8,7 @@ publisher: "CNCF"
 tags: ["kubernetes", "community", "cloud-native", "conference"]
 image: "./cover.jpeg"
 imageAlt: "Kubernetes Community Days Amsterdam event"
+featured: true
 draft: false
 ---
 

@@ -2,6 +2,24 @@
 title: "REST API Basics: A Beginner's Introduction to API Development"
 description: "A beginner-friendly guide to APIs, HTTP, REST, JSON, and setting up a FastAPI development environment."
 publishedAt: "2025-06-13T15:28:57.064Z"
+kind: guide
+guide:
+  level: beginner
+  prerequisites:
+    - "Basic Python: variables, functions, and data types"
+    - "Using the terminal or command prompt"
+    - "Installing Python packages with pip"
+  outcomes:
+    - "What APIs are and why they’re used"
+    - "How APIs communicate over the internet"
+    - "The basics of HTTP and REST"
+    - "How JSON is used for data exchange"
+    - "Set up a FastAPI development environment"
+  faq:
+    - question: "Do I need a frontend to follow this guide?"
+      answer: "No. This guide focuses on the backend API that a frontend or mobile app could connect to."
+    - question: "Does this part build the whole store?"
+      answer: "No. This first part introduces APIs, HTTP, REST, and JSON, and sets up the FastAPI development environment. The store is the goal of the wider series."
 tags: ["api-development","backend-development","beginner-tutorial","fastapi","http-methods","json","python","python-web-framework","rest-api","web-api"]
 featured: false
 draft: false
@@ -43,30 +61,6 @@ Throughout the series, you’ll build a backend API that powers the Footdev stor
 * Checking out orders
 
 You don’t need a frontend for now. We’ll focus purely on the API that a frontend or mobile app could connect to.
-
-## What You’ll Learn in This Part
-
-In this first part, you’ll get a foundation on what APIs are and how they work. You’ll learn:
-
-* What APIs are and why they’re used
-
-* How APIs communicate over the internet
-
-* The basics of HTTP and REST
-
-* How JSON is used for data exchange
-
-* How to setup your development environment for a FastAPI project
-
-### Prerequisites
-
-This tutorial is for beginners, but you should be comfortable with the basics of:
-
-* Python (variables, functions, basic data types)
-
-* Using the terminal or command prompt
-
-* Installing Python packages with pip
 
 ## **What is an API?**
 

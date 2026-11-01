@@ -1,7 +1,7 @@
 ---
 title: "Featured"
-description: "Articles and interviews featuring Ayodeji Ogundare's work."
-eyebrow: "Elsewhere"
+description: "Selected writing, talks, projects, and appearances."
+eyebrow: "In focus"
 ---
 
-Selected interviews and publications about community building, developer relations, and cloud native events.
+A selection of writing, talks, projects, and appearances across developer experience, open source, and community.

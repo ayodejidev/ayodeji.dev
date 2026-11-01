@@ -109,12 +109,14 @@ sentences. Use one primary action and one secondary action. Keep social links
 below the introduction. On mobile, stack the portrait and copy in DOM reading order.
 Give the image useful alt text; retain the source image's natural colour.
 
-### Featured article
+### Featured content
 
-One featured article per homepage. Use a 16:9 cover beside the title, description,
+Show public entries explicitly marked `featured: true` across writing, talks,
+projects, appearances, and routed pages. Use a 16:9 cover beside the title, description,
 and publication metadata. Stack the cover above the copy below 680px. Keep text
 outside the image. If the entry has no cover, give the title the space instead.
-Select from public entries and fall back to the latest public article.
+Order by date descending, then stable type/ID. Omit an empty selection; do not
+automatically feature the latest article. Use the same selection on `/featured`.
 
 ### Content index row
 
@@ -173,15 +175,17 @@ Related content follows the article with two or three ruled items.
 
 ### Newsletter and footer
 
-Close the homepage with one sentence describing the newsletter and an outbound
-Subscribe link using the existing Substack destination. Keep the footer compact:
-identity, social links, feed, and copyright. Avoid adding a subscription form
-without a real submission path.
+Use the shared footer on every page. Start with a newsletter section describing
+what readers can expect and link to the existing Substack destination. Follow
+with the site identity and grouped Explore and Connect links, then copyright
+and a back-to-top link. Use ruled divisions, the neutral soft surface, and native
+links. Stack the newsletter and link groups on small screens. Keep the homepage
+free of a duplicate newsletter block. No embedded subscription form is needed.
 
 ## Page compositions
 
-- **Home:** introduction → one featured article → latest writing → upcoming/recent
-  talks → selected projects and appearances → newsletter → footer. Omit empty groups.
+- **Home:** introduction → featured content → latest writing → upcoming/recent
+  talks → footer (including newsletter). Omit empty groups.
 - **Blog:** title and short introduction → topic navigation → article index → footer.
 - **Speaking:** introduction → upcoming talks in ascending date order → past talks
   in descending date order → footer.

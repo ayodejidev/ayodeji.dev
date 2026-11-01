@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import WritingList from '../components/WritingList.astro';
+import { getBlogPosts } from '../lib/content';
+const posts = await getBlogPosts();
+---
+<BaseLayout title="Technical guides" description="Practical, longer-form guides with prerequisites, explanations, and copyable Markdown.">
+  <PageHeader title="Technical guides" description="Learn by building. Practical walkthroughs, deeper explanations, and Markdown you can take with you." eyebrow="Writing / Guides" />
+  <WritingList posts={posts} selected="guide" />
+</BaseLayout>

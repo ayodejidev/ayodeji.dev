@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import WritingList from '../../components/WritingList.astro';
+import { getBlogPosts } from '../../lib/content';
+const posts = await getBlogPosts();
+---
+<BaseLayout title="Articles" description="Reflections and field reports on developer experience, open source, and community.">
+  <PageHeader title="Articles" description="Ideas, experiences, and field notes from engineering and developer advocacy." eyebrow="Writing / Articles" />
+  <WritingList posts={posts} selected="article" />
+</BaseLayout>

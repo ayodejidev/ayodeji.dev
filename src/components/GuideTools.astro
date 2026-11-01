@@ -1,0 +1,10 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props { post: CollectionEntry<'blog'>; }
+const { post } = Astro.props;
+const guide = post.data.guide;
+---
+<div class="guide-overview">
+  {!!guide?.outcomes.length && <section aria-labelledby="guide-outcomes"><h2 id="guide-outcomes">What you’ll learn</h2><ul>{guide.outcomes.map((item) => <li>{item}</li>)}</ul></section>}
+  {!!guide?.prerequisites.length && <section aria-labelledby="guide-prerequisites"><h2 id="guide-prerequisites">Before you start</h2><ul>{guide.prerequisites.map((item) => <li>{item}</li>)}</ul></section>}
+</div>
